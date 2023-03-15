@@ -18,11 +18,21 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
+const PORT = 3001;
 const { conn } = require('./src/db.js');
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
-  });
+conn.sync({ force: false }).then(/*async*/() => {
+  console.log('DB connected');
+   console.time('DB load time'); // Start the timer
+   
+   //await saveApiData();
+   console.timeEnd('DB load time'); // End the timer and log the elapsed time
+   console.log('DB loaded');
+   
+   server.listen(PORT, () => {
+      console.log('Server raised on port ' + PORT);
+   })
+}).catch((error) => {
+   console.log(error);
 });
