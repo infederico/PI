@@ -1,9 +1,12 @@
 const { Router } = require('express');
+
 const recipesRouter = Router();
 
 // importar controladores 
 const getRecipeDetail = require('../controllers/getRecipeDetail');
+const getRecipeByName = require('../controllers/getRecipeByName');
 const postRecipe = require('../controllers/postRecipe');
+
 
 recipesRouter.get('/:idRecipe', async (req, res) => {
     try {
@@ -20,6 +23,20 @@ recipesRouter.get('/:idRecipe', async (req, res) => {
 
 });
 
+
+recipesRouter.get('/', async (req, res) => {
+    try {
+        const { name } = req.query;
+        const results = await getRecipeByName(name);
+        
+        return res.status(200).json(results);
+
+    } catch (error) {
+        return res.status(404).send(error.message);
+    }
+});
+
+
 recipesRouter.post('/', async (req, res) => {
 try {
     const newRecipe = await postRecipe(req.body);
@@ -32,5 +49,6 @@ try {
     return res.status(404).send(error.message);
 }
 });
+
 
 module.exports = recipesRouter;
