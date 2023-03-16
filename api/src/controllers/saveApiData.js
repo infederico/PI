@@ -20,7 +20,7 @@ const saveApiData = async () => {
         //hardcodeo de tipos de dietas para pre cargar la DB
         const allDiets = ['glutenFree', 'ketogenic', 'vegetarian', 'lacto-vegetarian', 'ovo-vegetarian', 'vegan', 'pescetarian', 'paleo', 'lowFodmap', 'whole30', 'omnivore'];
         for (let i = 0; i < allDiets.length; i++) { // son 11 tipos de dietas
-            await Diet.create({ name: allDiets[i] });
+            await Diet.findOrCreate({ where: { name: allDiets[i] } });
         }
 
         return;

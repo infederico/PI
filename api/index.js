@@ -22,13 +22,12 @@ const PORT = 3001;
 const { conn } = require('./src/db.js');
 const saveApiData = require('./src/controllers/saveApiData');
 
-// Syncing all the models at once.
+// Syncing database
 conn.sync({ force: false }).then( async () => {
-  console.log('DB connected');
-   console.time('DB load time'); // Start the timer
-   
-   await saveApiData(); // precargo en la DB todas las diets disponibles
 
+   console.log('DB connected');
+   console.time('DB load time'); // Start the timer
+   await saveApiData(); // precargo en la DB todas las diets disponibles
    console.timeEnd('DB load time'); // End the timer and log the elapsed time
    console.log('DB loaded');
    
@@ -36,5 +35,5 @@ conn.sync({ force: false }).then( async () => {
       console.log('Server raised on port ' + PORT);
    })
 }).catch((error) => {
-   console.log(error);
+   console.error(error);
 });

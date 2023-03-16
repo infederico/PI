@@ -29,6 +29,8 @@ recipesRouter.get('/', async (req, res) => {
         const { name } = req.query;
         const results = await getRecipeByName(name);
         
+        if (results.error) throw new Error(results.error);
+
         return res.status(200).json(results);
 
     } catch (error) {

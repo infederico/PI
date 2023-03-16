@@ -1,8 +1,7 @@
 const { Router } = require('express');
 const dietsRouter = Router();
-const getAllDiets = require('../controllers/getAllDiets');
 
-// importar controladores 
+const getAllDiets = require('../controllers/getAllDiets');
 
 dietsRouter.get('/', async (req, res) => {
     try {
