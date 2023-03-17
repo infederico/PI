@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { GET_RECIPE_DETAIL, ADD_RECIPE } from "./actions-types";
+import { 
+  TOGGLE_THEME,
+  GET_RECIPE_DETAIL, ADD_RECIPE } from "./actions-types";
+
+export const toggleTheme = () => {
+  return { type: TOGGLE_THEME }
+};
 
 export const getRecipeDetail = (idRecipe) => async (dispatch) => {
     try {

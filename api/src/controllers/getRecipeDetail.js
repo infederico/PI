@@ -19,8 +19,8 @@ const getRecipeDetail = async (idRecipe) => {
     try {
         const dbResponse = await Recipe.findByPk(idRecipe);
         if (dbResponse) {
-            const { id, name, image, summary, healthScore, instructions } = dbResponse;
-            const recipeDetail = { id, name, image, summary, healthScore, instructions };
+            const { id, name, image, summary, healthScore, instructions, diets } = dbResponse;
+            const recipeDetail = { id, name, image, summary, healthScore, instructions, diets };
             return recipeDetail;
         }
     } catch (dbError) {
