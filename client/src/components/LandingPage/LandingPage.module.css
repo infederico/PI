@@ -9,12 +9,28 @@
     background-position: center center;
     opacity: 0.9;
     z-index: 1;
+    text-align:left;
+    
 }
+
+.title {
+   position: relative;
+   top: 7vh;
+   left: 15vh;
+}
+
+.subtitle {
+    position: relative;
+    top: 75vh;
+    left: 125vh;
+    font-size: 32px;
+ }
 
 .button {
     text-align: center;
     width: 112px;
-    border-radius: 6px;
+    border-radius: 7.5px;
+    border: whitesmoke solid 1px;
     box-sizing: border-box;
     display: block;
     z-index: 2;
@@ -35,7 +51,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 200%;
+    width: 400%;
     height: 100%;
     background: linear-gradient(115deg,#4fcf70,#fad648,#a767e5,#12bcfe,#44ce7b);
     background-size: 50% 100%;
@@ -44,16 +60,17 @@
 .button span {
     position: relative;
     z-index: 2;
-    padding: .875rem 0;
-    font-size: 1.1rem;
+    padding: .25rem 0;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2rem;
     align-items: center;
-    background: #000;
-    border-radius: 3px;
+    background: whitesmoke;
+    border-radius: 2.5px;
     display: block;
     justify-content: center;
     box-sizing: border-box;
     height: 100%;
-    color: #fff;
+    color: #202020;
 }
 
 @keyframes rainbowSlide {
@@ -63,6 +80,6 @@
 }
 
 .button:hover::before {
-    animation: rainbowSlide .75s linear infinite;
+    animation: rainbowSlide 1.25s linear infinite;
 }
 
