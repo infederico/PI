@@ -7,7 +7,7 @@ const getRecipeByName = async (name) => {
     try {
         if (name) {
 
-            const apiResponse = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${name}&addRecipeInformation=true&apiKey=${API_KEY}`);
+            const apiResponse = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${name}&addRecipeInformation=true&number=100&apiKey=${API_KEY}`);
         
             const apiResults = apiResponse.data.results;
 
@@ -21,7 +21,7 @@ const getRecipeByName = async (name) => {
         
             return results;
         } else {
-            const apiResponse = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=&addRecipeInformation=true&apiKey=${API_KEY}`);
+            const apiResponse = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=&addRecipeInformation=true&number=100&apiKey=${API_KEY}`);
         
             const apiResults = apiResponse.data.results;
 

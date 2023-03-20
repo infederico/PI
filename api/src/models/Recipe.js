@@ -32,7 +32,7 @@ module.exports = (database) => {
     },
     diets: {
       type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: true,
+      allowNull: false,
     }
   },
   {
