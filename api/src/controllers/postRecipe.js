@@ -10,7 +10,7 @@ const postRecipe = async (inputRecipe) => {
         const dataRecipe = { name, image, summary, healthScore, instructions, diets };
 
         // Create the new recipe in database
-        const newRecipe = await Recipe.create(dataRecipe)
+        const newRecipe = await Recipe.create(dataRecipe);
 
         // Find the diet in database
         for (let i = 0; i < diets.length; i++) {

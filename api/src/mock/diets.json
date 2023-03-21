@@ -1,0 +1,37 @@
+{
+    "data": [
+        {
+            "name": "glutenFree"
+        },
+        {
+            "name": "ketogenic"
+        },
+        {
+            "name": "vegetarian"
+        },
+        {
+            "name": "lacto-vegetarian"
+        },
+        {
+            "name": "ovo-vegetarian"
+        },
+        {
+            "name": "vegan"
+        },
+        {
+            "name": "pescetarian"
+        },
+        {
+            "name": "paleo"
+        },
+        {
+            "name": "lowFodmap"
+        },
+        {
+            "name": "whole30"
+        },
+        {
+            "name": "omnivore"
+        }
+    ]
+}
