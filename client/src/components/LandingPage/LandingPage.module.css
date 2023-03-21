@@ -23,7 +23,7 @@ body {
     font-family: 'EB Garamond', serif;
     font-size: 88px;
     line-height: 1.5;
-    color: beige; 
+    color: var(--dark-text-color); 
     
 }
 
@@ -50,7 +50,7 @@ body {
     text-align: center;
     width: 112px;
     border-radius: 7.5px;
-    border: whitesmoke solid 1px;
+    border:  var(--dark-text-color) solid 1px;
     box-sizing: border-box;
     display: block;
     z-index: 2;
@@ -85,13 +85,13 @@ body {
     font-weight: 700;
     font-size: 1.2rem;
     align-items: center;
-    background: whitesmoke;
+    background: var(--light-back-color);
     border-radius: 2.5px;
     display: block;
     justify-content: center;
     box-sizing: border-box;
     height: 100%;
-    color: #202020;
+    color: var(--light-text-color);
 }
 
 @keyframes rainbowSlide {

@@ -1,4 +1,5 @@
 import styles from './Nav.module.css';
+import '../../assets/css variables/variables.css';
 import { useSelector } from 'react-redux';
 import { NavLink, useNavigate } from "react-router-dom";
 import lightLogo from '../../assets/images/light-logo.png';

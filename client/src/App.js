@@ -7,9 +7,10 @@ import Nav from './components/Nav/Nav';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 
 const App = () => {
+
   const location = useLocation();
   const isLandingPage = location.pathname === '/';
-
+  
   return (
     <div className="App">
       {!isLandingPage && <Nav />}

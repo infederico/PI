@@ -5,9 +5,11 @@ import {
   GET_RECIPE_DETAIL, CLEAN_RECIPE_DETAIL,
   ADD_RECIPE } from "./actions-types";
 
+
 export const toggleTheme = () => {
   return { type: TOGGLE_THEME }
 };
+
 
 export const getRecipeDetail = (idRecipe) => async (dispatch) => {
     try {
@@ -21,10 +23,10 @@ export const getRecipeDetail = (idRecipe) => async (dispatch) => {
     }
 };
 
+
 export const cleanRecipeDetail = () => {
   return { type: CLEAN_RECIPE_DETAIL }
 };
-
 
 
 export const addRecipe = (newRecipe) => async (dispatch) => {
@@ -39,6 +41,7 @@ export const addRecipe = (newRecipe) => async (dispatch) => {
   }
 };
 
+
 export const search = (query) => async (dispatch) => {
   try {
     let response = await axios.get(`http://localhost:3001/recipes?name=${query}`);
@@ -50,3 +53,4 @@ export const search = (query) => async (dispatch) => {
     console.log(error);
   }
 };
+
