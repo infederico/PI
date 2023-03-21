@@ -29,11 +29,7 @@ module.exports = (database) => {
     instructions: {
       type: DataTypes.TEXT,
       allowNull: false,
-    },
-    diets: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: false,
-    }
+    }  
   },
   {
     timestamps: false,

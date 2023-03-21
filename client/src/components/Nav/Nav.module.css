@@ -1,0 +1,83 @@
+.darkNav {
+    background-color: rgb(48, 46, 46);
+    height: 64px;
+    display: flex;
+    align-items: center;
+  justify-content: space-evenly;
+  transition-duration: 0.7  5s;
+}
+
+.lightNav {
+  background-color: rgb(245, 245, 245);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  transition-duration: 0.75s;
+}
+
+.logo {
+    position: fixed;
+    left: 1em;
+    height: 48px;
+    cursor: pointer;
+    scale: 0.75;
+}
+  
+.logo:hover {
+    cursor: pointer;
+}
+
+.lightTextLogo {
+  margin-left: -12em;
+  font-size: 32px;
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 0.1;
+  color: rgb(48, 46, 46); 
+  transition-duration: 0.5s;
+}
+
+.darkTextLogo {
+  margin-left: -12em;
+  font-size: 32px;
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 0.1;
+  color: rgb(245, 245, 245); 
+  transition-duration: 0.5s;
+}
+
+.darkNavLinks {
+  margin: 0 16px;
+  color: rgb(245, 245, 245);
+  text-decoration: none;
+  font-family: 'EB Garamond', serif;
+  font-weight: 700;
+  transition-duration: 0.5s;
+}
+
+.lightNavLinks {
+  margin: 0 16px;
+  color: rgb(48, 46, 46);
+  text-decoration: none;
+  font-family: 'EB Garamond', serif;
+  font-weight: 700;
+  transition-duration: 0.5s;
+}
+
+.lightNavLinks a {
+  margin: 0 16px;
+  color: rgb(48, 46, 46);
+  text-decoration: none;
+  transition-duration: 0.5s;
+}
+.darkNavLinks a {
+  margin: 0 16px;
+  color: rgb(245, 245, 245);
+  text-decoration: none;
+  transition-duration: 0.5s;
+}
+

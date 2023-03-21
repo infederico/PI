@@ -1,16 +1,7 @@
     import styles from './LandingPage.module.css';
-    import { useSelector, useDispatch } from 'react-redux';
-    import { toggleTheme } from '../../redux/actions';
     import { Link } from 'react-router-dom';
 
     const LandingPage = () => {
-
-        const theme = useSelector(state => state.theme)
-        const dispatch = useDispatch();
-
-        const clickHandler = (event) => {
-            dispatch(toggleTheme());
-        };
 
         return (
             <div>

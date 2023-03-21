@@ -81,7 +81,7 @@ const FormPage = () => {
             <input type='checkbox' name='vegan' onChange={handleChange} value='vegan' checked={newRecipe.diets.includes('vegan')} />Vegan 
             <input type='checkbox' name='glutenFree' onChange={handleChange} value='glutenFree' checked={newRecipe.diets.includes('glutenFree')} />Gluten Free
             <input type='checkbox' name='paleo' onChange={handleChange} value='paleo' checked={newRecipe.diets.includes('paleo')} />Paleo 
-            <input type='checkbox' name='keto' onChange={handleChange} value='keto' checked={newRecipe.diets.includes('keto')} />Keto 
+            <input type='checkbox' name='ketogenic' onChange={handleChange} value='ketogenic' checked={newRecipe.diets.includes('ketogenic')} />Keto 
             <input type='checkbox' name='omnivore' onChange={handleChange} value='omnivore' checked={newRecipe.diets.includes('omnivore')} />Omnivore
             <br />
             

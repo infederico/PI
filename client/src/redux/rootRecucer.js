@@ -1,12 +1,15 @@
 import { 
     TOGGLE_THEME,
-    GET_RECIPE_DETAIL } from "./actions-types";
+    SEARCH,
+    GET_RECIPE_DETAIL, CLEAN_RECIPE_DETAIL } from "./actions-types";
 
 const initialState = {
 
-    theme: false,
+    theme: true,
 
-    recipeDetail: {},
+    searchResult: [],
+
+    recipeDetail: {}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -16,10 +19,20 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 theme: !state.theme
             }
+        case SEARCH:
+            return {
+                ...state,
+                searchResult: action.payload
+            }
         case GET_RECIPE_DETAIL:
             return {
                 ...state,
                 recipeDetail: action.payload
+            }
+        case CLEAN_RECIPE_DETAIL:
+            return {
+                ...state,
+                recipeDetail: {}
             }
         default: 
             return {

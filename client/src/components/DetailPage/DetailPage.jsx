@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getRecipeDetail } from '../../redux/actions';
+import { cleanRecipeDetail } from '../../redux/actions';
 
 const DetailPage = () => {
 
@@ -12,8 +13,11 @@ const DetailPage = () => {
     
     useEffect( () => {
         dispatch(getRecipeDetail(idRecipe));
-    }, []);
-
+        return () => {
+            dispatch(cleanRecipeDetail());
+        }
+    }, [dispatch, idRecipe]);
+// eslint-disable-next-line
     const { id, name, title, image, summary, healthScore, instructions, vegetarian, vegan, glutenFree, diets } = recipeDetail;
 
     return (

@@ -1,7 +1,7 @@
 const axios = require('axios');
 require('dotenv').config();
 const { API_KEY } = process.env;
-const { Recipe } = require('../db');
+const { Recipe, Diet } = require('../db');
 
 const getRecipeDetail = async (idRecipe) => {
 
@@ -18,17 +18,26 @@ const getRecipeDetail = async (idRecipe) => {
     }
   
     try {
-        const dbResponse = await Recipe.findByPk(idRecipe);
-        if (dbResponse) {
-            const { id, name, image, summary, healthScore, instructions, diets } = dbResponse;
+      const dbResponse = await Recipe.findByPk(idRecipe, {
+        include: {
+          model: Diet,
+          attributes: ['name'],
+          through: {
+            attributes: [],
+          },
+        },
+      })
+      if (dbResponse) {
+        const { id, name, image, summary, healthScore, instructions, Diets } = dbResponse;
+        const diets = Diets.map((diet) => diet.name);
 
-            const vegetarian = diets.includes('vegetarian')
-            const vegan = diets.includes('vegan')
-            const glutenFree = diets.includes('glutenFree');
-            
-            const recipeDetail = { id, name, image, summary, healthScore, instructions, vegetarian, vegan, glutenFree, diets };
-            return recipeDetail;
-        }
+        const vegetarian = diets.includes('vegetarian');
+        const vegan = diets.includes('vegan');
+        const glutenFree = diets.includes('gluten free');
+
+        const recipeDetail = { id, name, image, summary, healthScore, instructions, vegetarian, vegan, glutenFree, diets };
+        return recipeDetail;
+      }
     } catch (dbError) {
         console.error('Receta no encontrada en la DB');
     }

@@ -7,12 +7,12 @@ const postRecipe = async (inputRecipe) => {
         
         if(!name || !image || !summary || !healthScore || !instructions || diets.length === 0) throw new Error('Faltan datos obligatorios');
 
-        const dataRecipe = { name, image, summary, healthScore, instructions, diets };
+        const dataRecipeForCreate = { name, image, summary, healthScore, instructions/*, diets*/ };
 
         // Create the new recipe in database
-        const newRecipe = await Recipe.create(dataRecipe);
+        const newRecipe = await Recipe.create(dataRecipeForCreate);
 
-        // Find the diet in database
+        // Find the diets in database to relate the created recipe
         for (let i = 0; i < diets.length; i++) {
 
             const relatedDiet = await Diet.findOne({ where: { name: diets[i] } });
@@ -21,6 +21,10 @@ const postRecipe = async (inputRecipe) => {
             await newRecipe.addDiet(relatedDiet);
         }
 
+        const dataRecipe = {
+            ...dataRecipeForCreate,
+            diets: diets
+        }
         console.info('Se ha agregado tu receta correctamente')
         return dataRecipe;
 
