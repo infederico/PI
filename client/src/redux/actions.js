@@ -44,11 +44,19 @@ export const addRecipe = (newRecipe) => async (dispatch) => {
 
 export const search = (query) => async (dispatch) => {
   try {
+    if (query) {
     let response = await axios.get(`http://localhost:3001/recipes?name=${query}`);
     dispatch({
       type: SEARCH,
       payload: response.data,
     });
+    }
+    let response = await axios.get(`http://localhost:3001/recipes`);
+    dispatch({
+      type: SEARCH,
+      payload: response.data,
+    });
+
   } catch (error) {
     console.log(error);
   }
