@@ -39,6 +39,14 @@ const FormPage = () => {
         }
     };
 
+    const handleClick = (event) => {
+        setNewRecipe({
+            ...newRecipe,
+            diets: [...newRecipe.diets, newDiet]
+        })
+        setNewDiet('')
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
         if (newDiet) {
@@ -104,8 +112,8 @@ const FormPage = () => {
             <br />
             
             <label>other: </label>
-            <input type='checkbox' name='other' onChange={handleChange} value={newDiet} checked={newRecipe.diets.includes(`${newDiet}`)} />
             <input type='text' name='otherDetail' onChange={handleChange} value={newDiet} />
+            <input type='button' name='other' onClick={handleClick} value='add diet' />
             <br />
             <br />
 

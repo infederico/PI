@@ -1,34 +1,18 @@
-.lightTheme {
-    height: 100vh;
-    background-color: #FFFFFF;
-    position: fixed;
-    width: 100%;
-    z-index: 1;
-    color:#001101;
-    transition-duration: 0.5s;
-    
-}
-
-.darkTheme {
-    height: 100vh;
-    background-color: #001101;
-    position: fixed;
-    width: 100%;
-    z-index: 1;
-    color: #FFFFFF;
-    transition-duration: 0.5s;
-    
-}
-
-.main {
-    background-image: url('../../assets/images/landing.jpg');
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%; 
-    background-repeat: no-repeat;
+.light {
+    background-color: var(--primary-color-200);
     background-size: cover;
-    background-position: center center;
-    opacity: 0.75;
-    z-index: 2;
+    height: 100vh;
+}
+
+.dark {
+    background-color: var(--primary-color-800);
+    background-size: cover;
+    height: 100vh;
+}
+
+.cards  {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;    
+
 }

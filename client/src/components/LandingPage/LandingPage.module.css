@@ -19,15 +19,13 @@ body {
     opacity: 0.9;
     z-index: 1;
     text-align:left;
-
     font-family: 'EB Garamond', serif;
-    font-size: 88px;
     line-height: 1.5;
-    color: var(--dark-text-color); 
-    
+    color: var(--dark-text-color);
 }
 
 .title {
+    font-size: 88px;
    position: relative;
    top: 7vh;
    left: 15vh;
