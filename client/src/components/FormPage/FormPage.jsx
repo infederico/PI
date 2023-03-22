@@ -48,7 +48,7 @@ const FormPage = () => {
     };
 
     const handleSubmit = (event) => {
-        event.preventDefault();
+        
         if (newDiet) {
             setNewRecipe({
                 ...newRecipe,
@@ -57,7 +57,8 @@ const FormPage = () => {
             setNewDiet('');
         }
         dispatch(addRecipe(newRecipe))
-
+        alert('Recipe added successfully');
+        event.preventDefault();
         //clean local states after sending all data to create a new recipe
         setNewRecipe({
             name: '',
@@ -110,14 +111,13 @@ const FormPage = () => {
             <input type='checkbox' name='whole30' onChange={handleChange} value='whole30' checked={newRecipe.diets.includes('whole30')} />Whole30
             <input type='checkbox' name='primal' onChange={handleChange} value='primal' checked={newRecipe.diets.includes('primal')} />Primal
             <br />
-            
             <label>other: </label>
             <input type='text' name='otherDetail' onChange={handleChange} value={newDiet} />
             <input type='button' name='other' onClick={handleClick} value='add diet' />
             <br />
             <br />
 
-            <button type='submit'>Add recipe</button>
+            <button type='submit'>Create recipe</button>
             <br />
 
         </form>

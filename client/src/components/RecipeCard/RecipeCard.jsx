@@ -22,7 +22,7 @@ const RecipeCard = (props) => {
             {/* <img src={image} alt={name} /> */}
             <label className={styles.label}>diets: </label> 
             {
-                diets?.map((diet, index) => <span className={styles.span} key={index}>{diet}</span> )  
+                diets?.map((diet, index) => <p className={styles.span} key={index}>{diet}</p> )  
             }
         </div>
     );

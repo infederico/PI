@@ -7,6 +7,9 @@
             "summary": "A delicious frittata with roasted vegetables, eggs, and cheese",
             "healthScore": "34",
             "instructions": "Preheat oven to 400 degrees F. In a large bowl, whisk together eggs and salt until frothy. In a large ovenproof skillet, heat olive oil over medium heat. Add roasted vegetables and cook until heated through. Pour in egg mixture and cook until set. Sprinkle with cheese and broil until golden brown.",
+            "vegetarian": true,
+            "vegan": false,
+            "glutenFree": true,
             "diets": ["vegan", "vegetarian", "paleo", "glutenFree", "ketogenic"]
         },
         {
@@ -16,6 +19,9 @@
             "summary": "A delicious tortilla with vegetables, eggs, and chiken",
             "healthScore": "87",
             "instructions": "Preheat oven to 400 degrees F. In a large bowl, whisk together eggs and salt until frothy. In a large ovenproof skillet, heat olive oil over medium heat. Add roasted vegetables and cook until heated through. Pour in egg mixture and cook until set. Sprinkle with cheese and broil until golden brown.",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": false,
             "diets": ["paleo", "omnivore", "primal"]
         },
         {
@@ -25,6 +31,9 @@
             "summary": "A delicious mila and cheese",
             "healthScore": "21",
             "instructions": "Preheat oven to 400 degrees F. In a large bowl, whisk together eggs and salt until frothy. In a large ovenproof skillet, heat olive oil over medium heat. Add roasted vegetables and cook until heated through. Pour in egg mixture and cook until set. Sprinkle with cheese and broil until golden brown.",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": false,
             "diets": ["argentinian", "italian"]
         },
         {
@@ -34,6 +43,9 @@
             "summary": "Juicy chicken breasts stuffed with spinach and feta cheese",
             "healthScore": "65",
             "instructions": "Preheat oven to 375 degrees F. In a mixing bowl, combine the spinach, feta cheese, garlic, salt, and pepper. Slice each chicken breast horizontally to create a pocket, and stuff with the spinach and feta mixture. Place the stuffed chicken breasts in a baking dish, and bake for 30-35 minutes, or until the chicken is cooked through.",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": true,
             "diets": ["glutenFree", "ketogenic"]
         },
         {
@@ -43,6 +55,9 @@
             "summary": "Roasted salmon topped with a fresh and flavorful avocado salsa",
             "healthScore": "93",
             "instructions": "Preheat oven to 400 degrees F. Rub salmon fillets with olive oil, salt, and pepper. Place on a baking sheet and bake for 12-15 minutes. In a bowl, combine diced avocado, diced red onion, diced jalapeno pepper, chopped cilantro, lime juice, salt, and pepper. Serve the roasted salmon with the avocado salsa on top.",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": true,
             "diets": ["pescatarian", "omnivore"]
         },
         {
@@ -52,6 +67,9 @@
             "summary": "Hearty and healthy lentil soup",
             "healthScore": "76",
             "instructions": "In a large pot, heat olive oil over medium-high heat. Add diced onion, diced carrot, and diced celery and cook until softened. Add minced garlic and cook for another minute. Add lentils, vegetable broth, water, thyme, and bay leaf. Bring to a simmer and cook until lentils are tender, about 30-40 minutes. Season with salt and pepper to taste.",
+            "vegetarian": true,
+            "vegan": true,
+            "glutenFree": true,
             "diets": ["vegan", "vegetarian", "paleo", "glutenFree", "ketogenic"]
         },
         {
@@ -61,6 +79,9 @@
             "summary": "Classic beef stroganoff with tender strips of beef in a creamy sauce",
             "healthScore": "42",
             "instructions": "In a large skillet, heat olive oil over medium-high heat. Add sliced onion and cook until softened. Add sliced mushrooms and cook until tender. Remove from skillet and set aside. In the same skillet, cook beef strips until browned. Add back the onion and mushrooms, and stir in sour cream, beef broth, and dijon mustard. Cook until heated through and sauce has thickened. Serve over cooked egg noodles.",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": true,
             "diets": ["omnivore"]
         },
         {
@@ -70,6 +91,9 @@
             "summary": "A vegan version of the classic Thai dish, made with rice noodles, tofu, and vegetables",
             "healthScore": "65",
             "instructions": "Cook noodles according to package instructions. In a large skillet or wok, heat oil over medium-high heat. Add tofu and cook until browned on all sides. Add garlic and ginger and cook for 1 minute. Add vegetables and cook until softened. Add cooked noodles and sauce, and stir to combine. Cook for 2-3 minutes, or until heated through.",
+            "vegetarian": true,
+            "vegan": true,
+            "glutenFree": true,
             "diets": ["vegan", "vegetarian", "glutenFree"]
         },
         {
@@ -78,6 +102,9 @@
             "image": "https://www.foodnetwork.com/recipes/beef-and-broccoli-stir-fry-recipe-1973498",
             "summary": "A quick and easy stir-fry made with beef, broccoli, and a flavorful sauce",
             "healthScore": "54",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": true,
             "instructions": "In a small bowl, whisk together cornstarch, soy sauce, and broth until smooth. In a large skillet or wok, heat oil over high heat. Add beef and cook until browned on all sides. Add garlic and ginger and cook for 1 minute. Add broccoli and cook until tender-crisp. Stir in sauce and cook until thickened. Serve over rice.",
             "diets": ["omnivore", "paleo", "glutenFree"]
         },
@@ -88,6 +115,9 @@
             "summary": "A creamy and comforting soup made with butternut squash, onion, and cream",
             "healthScore": "42",
             "instructions": "In a large pot, heat butter over medium heat. Add onion and cook until softened. Add butternut squash and chicken broth. Bring to a boil, then reduce heat and simmer until squash is tender. Use an immersion blender to puree soup until smooth. Stir in cream and season with salt and pepper.",
+            "vegetarian": true,
+            "vegan": false,
+            "glutenFree": true,
             "diets": ["vegetarian", "glutenFree"]
         },
         {
@@ -97,6 +127,9 @@
             "summary": "A spicy and flavorful jambalaya made with shrimp, sausage, and rice",
             "healthScore": "64",
             "instructions": "In a large pot or Dutch oven, heat oil over medium-high heat. Add sausage and cook until browned. Add onion, bell pepper, and celery and cook until softened. Add garlic and cook for 1 minute. Add rice and cook, stirring constantly, until coated with oil. Add chicken broth, diced tomatoes, and spices. Bring to a boil, then reduce heat and simmer until rice is tender. Stir in shrimp and cook until pink and cooked through.",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": true,
             "diets": ["omnivore", "glutenFree"]
         },
         {
@@ -106,6 +139,9 @@
             "summary": "A spicy and flavorful Indian curry dish made with marinated chicken cooked in a tomato-based sauce",
             "healthScore": "65",
             "instructions": "Marinate the chicken in yogurt and spices for at least 30 minutes. Grill the chicken or cook it in the oven. In a separate pan, cook onions, garlic, and ginger. Add tomato puree, spices, and cream. Add the cooked chicken to the sauce and let it simmer for a few minutes.",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": true,
             "diets": ["glutenFree", "lactoseFree"]
         },
         {
@@ -115,6 +151,9 @@
             "summary": "A comforting soup made with roasted butternut squash, onions, and spices",
             "healthScore": "80",
             "instructions": "Roast butternut squash and onions with olive oil, salt, and pepper. Blend the roasted vegetables with chicken or vegetable broth until smooth. Add heavy cream and simmer until heated through. Serve hot.",
+            "vegetarian": true,
+            "vegan": true,
+            "glutenFree": true,
             "diets": ["vegan", "vegetarian", "paleo", "glutenFree"]
         },
         {
@@ -124,6 +163,9 @@
             "summary": "A hearty and creamy Russian dish made with beef, mushrooms, and sour cream",
             "healthScore": "45",
             "instructions": "Cook beef in a pan until browned. Remove from pan and cook mushrooms until tender. Add onions, garlic, and flour to the pan and cook until fragrant. Add beef broth and bring to a boil. Add sour cream and mustard. Add beef and mushrooms back to the pan and cook until heated through.",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": false,
             "diets": ["omnivore"]
         },
         {
@@ -133,6 +175,9 @@
             "summary": "A simple and delicious pasta dish made with basil pesto and pasta",
             "healthScore": "70",
             "instructions": "Cook pasta according to package instructions. Drain and reserve some pasta water. Toss pasta with pesto and some pasta water until well coated. Serve hot or cold.",
+            "vegetarian": true,
+            "vegan": true,
+            "glutenFree": true,
             "diets": ["vegan", "vegetarian", "paleo", "glutenFree", "ketogenic"]
         },
         {
@@ -142,6 +187,9 @@
             "summary": "This classic pasta dish is filled with the flavors of clams and pancetta.",
             "healthScore": "65",
             "instructions": "Cook the linguine in a large pot of boiling salted water until tender but still firm to the bite, stirring occasionally, about 8 minutes. Drain, reserving 1 cup of the pasta cooking liquid. Meanwhile, in a large, heavy skillet, cook the pancetta over medium heat until crisp, about 8 minutes. Using a slotted spoon, transfer the pancetta to a paper towel-lined plate. Add the shallots and garlic to the drippings in the same skillet and saute over medium heat until tender, about 2 minutes. Add the clams and wine and simmer, covered, until the clams open, about 8 minutes. Discard any clams that do not open. Add the linguine, pancetta, and parsley to the clam mixture. Toss to coat, adding the reserved cooking liquid 1/4 cup at a time to moisten. Season the pasta, to taste, with salt and pepper. Serve.",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": false,
             "diets": ["italian", "mediterranean"]
         },
         {
@@ -151,6 +199,9 @@
             "summary": "A classic Greek salad with fresh vegetables and feta cheese",
             "healthScore": "84",
             "instructions": "In a large bowl, whisk together olive oil, lemon juice, garlic, salt, and pepper. Add sliced cucumber, halved cherry tomatoes, sliced red onion, and crumbled feta cheese. Toss to combine and serve.",
+            "vegetarian": true,
+            "vegan": false,
+            "glutenFree": true,
             "diets": ["vegetarian", "glutenFree"]
         },
         {
@@ -160,6 +211,9 @@
             "summary": "Creamy and comforting soup made with butternut squash",
             "healthScore": "67",
             "instructions": "Preheat oven to 400 degrees F. Cut a butternut squash in half lengthwise and remove the seeds. Brush the squash with olive oil and place cut-side down on a baking sheet. Roast until tender, about 45-50 minutes. Scoop out the flesh and set aside. In a large pot, heat butter over medium heat. Add diced onion and cook until softened. Add minced garlic and cook for another minute. Add the roasted butternut squash, vegetable broth, and a pinch of nutmeg. Bring to a simmer and cook for 15-20 minutes. Use an immersion blender to puree the soup until smooth. Stir in heavy cream and season with salt and pepper to taste.",
+            "vegetarian": true,
+            "vegan": false,
+            "glutenFree": true,
             "diets": ["vegetarian", "paleo", "glutenFree"]
         },
         {
@@ -169,6 +223,9 @@
             "summary": "Pasta coated in a flavorful basil pesto sauce",
             "healthScore": "46",
             "instructions": "Cook pasta according to package directions. Drain and set aside. In a food processor, pulse together basil, garlic, pine nuts, parmesan cheese, lemon juice, salt, and pepper until finely chopped. With the motor running, slowly add olive oil until the mixture is smooth. Toss the cooked pasta with the pesto sauce and serve.",
+            "vegetarian": true,
+            "vegan": false,
+            "glutenFree": false,
             "diets": ["vegetarian"]
         },
         {
@@ -178,6 +235,9 @@
             "summary": "A classic Caesar salad with grilled chicken",
             "healthScore": "62",
             "instructions": "Preheat grill to medium-high heat. Season chicken breasts with salt and pepper. Grill until cooked through, about 6-7 minutes per side. In a large bowl, whisk together olive oil, lemon juice, minced garlic, Dijon mustard, Worcestershire sauce, anchovy paste, and a pinch of salt and pepper. Add chopped romaine lettuce and toss to coat. Top with sliced grilled chicken and shaved parmesan cheese.",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": false,
             "diets": ["paleo"]
         },
         {
@@ -187,6 +247,9 @@
             "summary": "A healthy and flavorful salad made with quinoa and roasted vegetables",
             "healthScore": "88",
             "instructions": "Preheat oven to 400 degrees F. In a large bowl, toss together sliced vegetables, olive oil, salt, and pepper. Spread the vegetables out in a single layer on a baking sheet and roast until tender, about 20-25 minutes. Meanwhile, cook quinoa according to package instructions. In a large bowl, whisk together lemon juice, olive oil, garlic, salt, and pepper. Add cooked quinoa and roasted vegetables and toss to combine. Serve at room temperature or chilled.",
+            "vegetarian": true,
+            "vegan": true,
+            "glutenFree": true,
             "diets": ["vegan", "vegetarian", "paleo", "glutenFree"]
         },
         {
@@ -196,6 +259,9 @@
             "summary": "A classic Chinese dish with tender beef and crisp broccoli",
             "healthScore": "62",
             "instructions": "In a small bowl, whisk together soy sauce, cornstarch, and water. Set aside. Heat oil in a wok or large skillet over high heat. Add sliced beef and cook until browned and just cooked through. Remove beef from pan and set aside. Add broccoli florets and sliced onion to the pan and stir-fry until tender-crisp. Add the beef back to the pan, along with the soy sauce mixture. Cook, stirring constantly, until the sauce thickens and coats the beef and vegetables. Serve over rice or noodles.",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": false,
             "diets": ["omnivore"]
         },
         {
@@ -205,6 +271,9 @@
             "summary": "Crisp bread topped with juicy tomatoes, basil, and garlic",
             "healthScore": "35",
             "instructions": "Preheat oven to 400 degrees F. Brush sliced bread with olive oil and bake until crisp and golden brown, about 8-10 minutes. Meanwhile, combine diced tomatoes, minced garlic, chopped basil, olive oil, and balsamic vinegar in a bowl. Season with salt and pepper to taste. Spoon tomato mixture over the toasted bread and serve immediately.",
+            "vegetarian": true,
+            "vegan": false,
+            "glutenFree": false,
             "diets": ["vegetarian"]
         },
         {
@@ -214,6 +283,9 @@
             "summary": "A simple and delicious grilled salmon recipe",
             "healthScore": "90",
             "instructions": "Preheat grill to medium-high heat. Brush salmon fillets with olive oil and season with salt and pepper. Grill for 4-5 minutes per side, or until cooked through. Serve with lemon wedges and enjoy!",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": true,
             "diets": ["pescatarian", "glutenFree", "dairyFree"]
         },
         {
@@ -223,6 +295,9 @@
             "summary": "A flavorful and healthy salmon dish with lemon and dill",
             "healthScore": "90",
             "instructions": "Preheat oven to 375 degrees F. Place salmon fillets on a baking sheet lined with parchment paper. Drizzle with olive oil and sprinkle with salt and pepper. Top with lemon slices and fresh dill. Bake for 15-20 minutes, or until the salmon is cooked through.",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": true,
             "diets": ["pescatarian", "glutenFree", "ketogenic"]
         },
         {
@@ -232,6 +307,9 @@
             "summary": "A nutritious and delicious salad with roasted vegetables and quinoa",
             "healthScore": "80",
             "instructions": "Preheat oven to 400 degrees F. Toss vegetables (such as zucchini, eggplant, bell peppers) with olive oil, salt, and pepper. Roast in the oven for 20-25 minutes. Cook quinoa according to package instructions. Mix together quinoa and roasted vegetables. Add lemon juice, olive oil, and salt and pepper to taste.",
+            "vegetarian": true,
+            "vegan": true,
+            "glutenFree": true,
             "diets": ["vegan", "vegetarian", "glutenFree"]
         },
         {
@@ -241,6 +319,9 @@
             "summary": "A classic stir-fry dish with beef and broccoli",
             "healthScore": "70",
             "instructions": "In a bowl, mix together soy sauce, brown sugar, cornstarch, and garlic. Cut beef into thin strips and toss with the mixture. Heat oil in a wok or large skillet over high heat. Add beef and cook until browned. Add broccoli and cook until tender. Serve with rice.",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": false,
             "diets": ["omnivore"]
         },
         {
@@ -250,6 +331,9 @@
             "summary": "A creamy and flavorful risotto with mushrooms",
             "healthScore": "60",
             "instructions": "In a saucepan, heat chicken broth over medium heat. In a large skillet, heat olive oil over medium heat. Add chopped onion and cook until translucent. Add chopped mushrooms and cook until tender. Add Arborio rice and cook until coated with oil. Gradually add the warm chicken broth, stirring constantly, until the rice is tender and the mixture is creamy. Stir in grated Parmesan cheese and serve.",
+            "vegetarian": true,
+            "vegan": false,
+            "glutenFree": false,
             "diets": ["vegetarian"]
         },
         {
@@ -259,6 +343,9 @@
             "summary": "A classic Chinese-American dish featuring tender beef and crisp broccoli in a savory sauce",
             "healthScore": "57",
             "instructions": "Heat oil in a wok or large skillet over high heat. Add beef and cook until browned on all sides. Remove beef and set aside. Add broccoli to the pan and cook until tender-crisp. Return beef to the pan and add the sauce. Cook until the sauce thickens and coats the beef and broccoli.",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": true,
             "diets": ["paleo", "glutenFree", "ketogenic"]
         },
         {
@@ -268,6 +355,9 @@
             "summary": "A classic Italian-American dish featuring shrimp in a garlic and butter sauce served over linguine",
             "healthScore": "42",
             "instructions": "Cook linguine according to package instructions. In a large skillet, melt butter and olive oil over medium heat. Add garlic and red pepper flakes and cook until fragrant. Add shrimp and cook until pink. Add white wine, lemon juice, and parsley and cook until the sauce has reduced. Serve over cooked linguine.",
+            "vegetarian": false,
+            "vegan": false,
+            "glutenFree": false,
             "diets": ["glutenFree", "omnivore"]
         },
         {
@@ -277,6 +367,9 @@
             "summary": "A flavorful and healthy dish featuring brown rice and a variety of vegetables",
             "healthScore": "76",
             "instructions": "Cook brown rice according to package instructions. In a large skillet or wok, heat oil over high heat. Add diced onion and cook until translucent. Add minced garlic and grated ginger and cook until fragrant. Add diced vegetables and cook until tender. Add cooked brown rice and soy sauce and stir until heated through.",
+            "vegetarian": true,
+            "vegan": true,
+            "glutenFree": true,
             "diets": ["vegan", "vegetarian", "glutenFree"]
         }
     ]
