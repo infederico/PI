@@ -1,7 +1,7 @@
 import styles from './Nav.module.css';
 import '../../assets/css variables/variables.css';
 import { useSelector } from 'react-redux';
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import lightLogo from '../../assets/images/light-logo.png';
 import darkLogo from '../../assets/images/dark-logo.png';
 import ToggleTheme from '../ThemeToggle/ThemeToggle';
@@ -10,6 +10,8 @@ import SearchBar from '../SearchBar/SearchBar';
 const Nav = () => {
   const theme = useSelector(state => state.theme);
   const navigate = useNavigate();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/home';
 
   return (
     <div className={ theme ? styles.lightNav : styles.darkNav }>
@@ -23,7 +25,7 @@ const Nav = () => {
 
       <span className={theme ? styles.lightTextLogo : styles.darkTextLogo}>foody</span>
 
-      <SearchBar />
+      {isHomePage && <SearchBar />}
       
       <label >
         <div className={ theme ? styles.lightNavLinks : styles.darkNavLinks }>

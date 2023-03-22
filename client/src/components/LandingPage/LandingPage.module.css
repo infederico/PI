@@ -85,7 +85,7 @@ body {
     font-weight: 700;
     font-size: 1.2rem;
     align-items: center;
-    background: var(--light-back-color);
+    background: var(--primary-color-100);
     border-radius: 2.5px;
     display: block;
     justify-content: center;

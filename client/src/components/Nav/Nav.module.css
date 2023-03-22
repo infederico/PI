@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: space-evenly;
   transition-duration: 0.75s;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
 }
 
 .lightNav {
@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: space-evenly;
   transition-duration: 0.75s;
-  box-shadow: 0 0 5pxpx rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
 }
 
 .logo {
@@ -31,23 +31,21 @@
 }
 
 .lightTextLogo {
-  margin-left: -12em;
-  font-size: 32px;
+  font-size: 40px;
   font-family: 'EB Garamond', serif;
   font-style: italic;
   font-weight: 700;
-  line-height: 0.1;
+  line-height: 0.05;
   color: var(--light-text-color); 
   transition-duration: 0.5s;
 }
 
 .darkTextLogo {
-  margin-left: -12em;
-  font-size: 32px;
+  font-size: 40px;
   font-family: 'EB Garamond', serif;
   font-style: italic;
   font-weight: 700;
-  line-height: 0.1;
+  line-height: 0.05;
   color: var(--dark-text-color); 
   transition-duration: 0.5s;
 }
