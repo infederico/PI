@@ -3,7 +3,7 @@ import {
   TOGGLE_THEME,
   SEARCH,
   GET_RECIPE_DETAIL, CLEAN_RECIPE_DETAIL,
-  ADD_RECIPE } from "./actions-types";
+  ADD_RECIPE, ADD_BACKEND_ERRORS, CLEAN_RECIPE_JUST_CREATED, CLEAN_BACKEND_ERRORS } from "./actions-types";
 
 
 export const toggleTheme = () => {
@@ -37,8 +37,21 @@ export const addRecipe = (newRecipe) => async (dispatch) => {
       payload: response.data,
     });
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: ADD_BACKEND_ERRORS,
+      payload: error.message,
+    });
   }
+};
+
+
+export const cleanRecipeJustCreated = () => {
+  return { type: CLEAN_RECIPE_JUST_CREATED };
+};
+
+
+export const cleanBackendErrors = () => {
+  return { type: CLEAN_BACKEND_ERRORS };
 };
 
 

@@ -1,7 +1,8 @@
 import { 
     TOGGLE_THEME,
     SEARCH,
-    GET_RECIPE_DETAIL, CLEAN_RECIPE_DETAIL } from "./actions-types";
+    GET_RECIPE_DETAIL,
+    ADD_RECIPE, ADD_BACKEND_ERRORS, CLEAN_RECIPE_DETAIL, CLEAN_RECIPE_JUST_CREATED, CLEAN_BACKEND_ERRORS } from "./actions-types";
 
 const initialState = {
 
@@ -9,7 +10,11 @@ const initialState = {
 
     searchResult: [],
 
-    recipeDetail: {}
+    recipeDetail: {},
+
+    recipeJustCreated: {},
+
+    backendErrors: '',
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -33,6 +38,26 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 recipeDetail: {}
+            }
+        case ADD_RECIPE:
+            return {
+                ...state,
+                recipeJustCreated: action.payload
+            }
+        case CLEAN_RECIPE_JUST_CREATED:
+            return {
+                ...state,
+                recipeJustCreated: {}
+            }
+        case ADD_BACKEND_ERRORS:
+            return {
+                ...state,
+                backendErrors: action.payload
+            }
+        case CLEAN_BACKEND_ERRORS:
+            return {
+                ...state,
+                backendErrors: ''
             }
         default: 
             return {

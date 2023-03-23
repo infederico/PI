@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addRecipe } from '../../redux/actions';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addRecipe, cleanRecipeJustCreated, cleanBackendErrors } from '../../redux/actions';
 
 import styles from './FormPage.module.css';
 
@@ -9,6 +9,9 @@ import validation from './validation';
 const FormPage = () => {
 
     const dispatch = useDispatch();
+
+    const recipeJustCreated = useSelector(state => state.recipeJustCreated)
+    const backendErrors = useSelector(state => state.backendErrors)
 
     const [ newRecipe, setNewRecipe ] = useState({
         name: '',
@@ -29,6 +32,10 @@ const FormPage = () => {
     const [submitted, setSubmitted] = useState(false);
 
     const handleChange = (event) => {
+        // reset global states that tracks recipe creation errors and success
+        dispatch(cleanRecipeJustCreated());
+        dispatch(cleanBackendErrors());
+
         const { name, type, checked, value } = event.target;
         if (name === 'otherDetail') {
             setNewDiet(value);
@@ -57,7 +64,9 @@ const FormPage = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
+        // reset global states that tracks recipe creation errors and success
+        dispatch(cleanRecipeJustCreated());
+        //dispatch(cleanBackendErrors());
         //check if user add custom diets and add to diets array before dispatch, then clean the other diets input box so the user can continue adding more custom diets
         if (newDiet) {
             setNewRecipe({
@@ -71,7 +80,7 @@ const FormPage = () => {
         let aux = validation(newRecipe);
         setErrors(aux);
         if ((Object.keys(aux).length) !== 0) {
-            alert('Please follow the instructions to correct data errors');
+            alert('Recipe not submitted. Please follow the instructions to correct data errors');
             //set submitted state in true to allow errors rendering after first submit attemp
             setSubmitted(true);
             return;
@@ -81,9 +90,6 @@ const FormPage = () => {
         if (Object.keys(aux).length === 0) {
             //action dispatch - crate new recipe in DB
             dispatch(addRecipe(newRecipe));
-            //confirm to the user 
-            alert('Recipe created successfully');
-            
             //clean local state after sending all data
             setNewRecipe({
                 name: '',
@@ -100,9 +106,15 @@ const FormPage = () => {
             setErrors({});
             //reset the local state once the new recipe was created successfully to permi a good user experience and dont show errors until first submit attemp
             setSubmitted(false);
+            //confirm to the user in screen and recipeJustCreated detail on browser console
+            //if (!recipeJustCreated.name) {alert('Recipe created successfully');}
             return;
         }
     };
+    
+    useEffect(() => {
+    
+    }, [recipeJustCreated, backendErrors]);
 
     return (
         <form onSubmit={handleSubmit} className={styles.formu}>
@@ -160,124 +172,16 @@ const FormPage = () => {
             <br />
             <br />
 
+            {recipeJustCreated.name && <span className={styles.errors}>{`${recipeJustCreated.name} has been created successfully`}</span>}
+            {backendErrors && <span className={styles.errors}>{`Recipe submitted but not crated due server error. ${backendErrors}`}</span>}
+
             <button type='submit'>Create recipe</button>
             <br />
-
         </form>
     );
 };
 
 export default FormPage;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { addRecipe } from '../../redux/actions';
-
-// const FormPage = () => {
-
-//     const dispatch = useDispatch();
-
-//     const [ newRecipe, setNewRecipe ] = useState({
-//         name: '',
-//         image: '',
-//         summary: '',
-//         healthScore: 0,
-//         instructions: '',
-//         vegetarian: false,
-//         vegan: false,
-//         glutenFree: false,
-//         diets: [],
-//     });
-    
-//     const handleChange = (event) => {
-//         if (event.target.name === 'diets') {
-//             setNewRecipe({
-//                 ...newRecipe,
-//                 diets: [...newRecipe.diets, ...event.target.value]
-//             })
-//         }
-//         setNewRecipe({
-//             ...newRecipe,
-//             [event.target.name]: event.target.value,
-//         });
-//     };
-
-//     const handleSubmit = (event) => {
-//         event.preventDefault();
-        
-//         dispatch(addRecipe(newRecipe))
-//         window.alert('Se ha agregado tu receta correctamente')
-//         setNewRecipe({
-//             name: '',
-//             image: '',
-//             summary: '',
-//             healthScore: 0,
-//             instructions: '',
-            
-//         });
-//     };
-
-    
-//     return (
-//         <form onSubmit={handleSubmit}>
-    
-//             <label>Name: </label>
-//             <input type='text' name='name' onChange={handleChange} value={newRecipe.name} />
-      
-//             <label>Image: </label>
-//             <input type='text' name='image' onChange={handleChange} value={newRecipe.image} />
-      
-//             <label>Summary: </label>
-//             <input type='text' name='summary' onChange={handleChange} value={newRecipe.summary} />
-      
-//             <label>Health Score: </label>
-//             <input type='number' name='healthScore' onChange={handleChange} value={newRecipe.healthScore} />
-      
-//             <label>Instructions: </label>
-//             <input type='text' name='instructions' onChange={handleChange} value={newRecipe.instructions} />
-
-//             <label>Diets: </label>
-//             <input type='text' name='diets' onChange={handleChange} value={newRecipe.diets} /> 
-
-//             <button type='submit'>Agregar receta</button>
-
-//         </form>
-//     );
-// };
-
-// export default FormPage;
-
 
 
 

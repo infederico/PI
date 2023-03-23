@@ -9,6 +9,8 @@ const postRecipe = async (inputRecipe) => {
 
         const dataRecipeForCreate = { name, image, summary, healthScore, instructions };
 
+        //check
+
         // Create the new recipe in database
         const newRecipe = await Recipe.create(dataRecipeForCreate);
 
