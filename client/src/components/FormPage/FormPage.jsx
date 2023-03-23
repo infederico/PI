@@ -54,7 +54,7 @@ const FormPage = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        //check if user add custo diets and add to diets array before dispatch, then clean the other diets input box so the user can continue adding more custom diets
+        //check if user add custom diets and add to diets array before dispatch, then clean the other diets input box so the user can continue adding more custom diets
         if (newDiet) {
             setNewRecipe({
                 ...newRecipe,
@@ -67,7 +67,7 @@ const FormPage = () => {
         let aux = validation(newRecipe);
         setErrors(aux);
         if ((Object.keys(aux).length) !== 0) {
-            alert('validation error/s');
+            alert('Please follow the instructions to correct data errors');
             return;
         }
 
@@ -108,24 +108,30 @@ const FormPage = () => {
 
             <label>Image: </label>
             <input type='text' name='image' onChange={handleChange} value={newRecipe.image} />
-            {errors.image1 && <p className={styles.errors} >{errors.image1}</p>}
-            {errors.image2 && <p className={styles.errors} >{errors.image2}</p>}
-            {errors.image3 && <p className={styles.errors} >{errors.image3}</p>}
+            {errors.image1 && <span className={styles.errors} >{errors.image1}</span>}
+            {errors.image2 && <span className={styles.errors} >{errors.image2}</span>}
+            {errors.image3 && <span className={styles.errors} >{errors.image3}</span>}
             <br />
 
             <label>Summary: </label>
             <input type='text' name='summary' onChange={handleChange} value={newRecipe.summary} />
+            {errors.summary && <span className={styles.errors} >{errors.summary}</span>}
             <br />
 
             <label>Health Score: </label>
             <input type='number' name='healthScore' onChange={handleChange} value={newRecipe.healthScore} />
+            {errors.healthScore1 && <span className={styles.errors} >{errors.healthScore1}</span>}
+            {errors.healthScore2 && <span className={styles.errors} >{errors.healthScore2}</span>}
+            {errors.healthScore3 && <span className={styles.errors} >{errors.healthScore3}</span>}
             <br />
 
             <label>Instructions: </label>
             <input type='text' name='instructions' onChange={handleChange} value={newRecipe.instructions} />
+            {errors.instructions && <span className={styles.errors} >{errors.instructions}</span>}
             <br />
 
             <label>Diets: </label>
+
             <br />
             <input type='checkbox' name='vegetarian' onChange={handleChange} value='vegetarian' checked={newRecipe.diets.includes('vegetarian')} />Vegetarian 
             <input type='checkbox' name='vegan' onChange={handleChange} value='vegan' checked={newRecipe.diets.includes('vegan')} />Vegan 

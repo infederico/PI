@@ -1,5 +1,5 @@
 const validation = (recipeData) => {
-    let { name, image, summary, healthScore, instructions, diets } = recipeData;
+    let { name, image, summary, healthScore, instructions } = recipeData;
     let errors = {};
     
     
@@ -14,7 +14,7 @@ const validation = (recipeData) => {
     } // developer decision - STRINGs can support any UTF-16 characters
     
     if (name.length > 255) {
-        errors.name3 = 'This field support up to 255 characters long'
+        errors.name3 = 'This field support up to 255 characters'
     } // DB requirement - type: DataTpes.STRING, by default 255 characters supported
     
     
@@ -25,14 +25,40 @@ const validation = (recipeData) => {
     
     const regexImage = /\b(https?|ftp):\/\/\S+\.(jpg|jpeg|png|gif)\b/;
     if (!regexImage.test(image)) {
-        errors.image2 = 'This field only accept a valid "http" or "ftp" url link to an image file (supported formats: jpg jpeg png gif)';
+        errors.image2 = 'This field only accept a valid "http" or "ftp" url link to an image file (supported formats: jpg-jpeg-png-gif)';
     } // developer decision - must be a valid link and control if the format of the file is supported
     
     if (image.length > 255) {
-        errors.image3 = 'This field support up to 255 characters long'
+        errors.image3 = 'This field support up to 255 characters'
     } // DB requirement - type: DataTpes.STRING, by default 255 characters supported
     
+
+    //SUMMARY
+    if (!summary) {
+        errors.summary = 'This field is required';
+    } // DB requirement - allowNull: false, type: DataTypes.TEXT - unlimited characters
+
+
+    //HEALTH SCORE
+    if (!healthScore) {
+        errors.healthScore1 = 'This field is required';
+    } // DB requirement - allowNull: false  
     
+    if (!Number.isInteger(healthScore)) {
+        errors.healthScore2 = 'Health Score must be an integer number';
+    } // DB requirement - type: DataTypes.INTEGER - must be an integer
+    
+    if (healthScore < 1 || healthScore > 100) {
+        errors.healthScore3 = 'Health Score must be between 1 and 100';
+    } // developer decision - must be a number between 1 and 100
+    
+
+    //SUMMARY
+    if (!instructions) {
+        errors.instructions = 'This field is required';
+    } // DB requirement - allowNull: false, type: DataTypes.TEXT - unlimited characters
+
+
     return errors;
 };
 
