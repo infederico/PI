@@ -54,12 +54,18 @@ const FormPage = () => {
         }
     };
 
-    const handleClick = (event) => {
-        setNewRecipe({
-            ...newRecipe,
-            diets: [...newRecipe.diets, newDiet]
-        })
-        setNewDiet('')
+    const handleClick = () => {
+        const newDietLowerCase = newDiet.toLowerCase();
+        if (newRecipe.diets.includes(newDietLowerCase)) {
+            alert('You already added this diet');
+            return;
+        } else {
+            setNewRecipe({
+                ...newRecipe,
+                diets: [...newRecipe.diets, newDietLowerCase]
+            })
+            setNewDiet('');
+        }
     };
 
     const handleSubmit = (event) => {
@@ -68,12 +74,17 @@ const FormPage = () => {
         dispatch(cleanRecipeJustCreated());
         //dispatch(cleanBackendErrors());
         //check if user add custom diets and add to diets array before dispatch, then clean the other diets input box so the user can continue adding more custom diets
+        const newDietLowerCase = newDiet.toLowerCase();
         if (newDiet) {
-            setNewRecipe({
-                ...newRecipe,
-                diets: [...newRecipe.diets, newDiet]
-            });
-            setNewDiet('');
+            if (newRecipe.diets.includes(newDietLowerCase)) {
+                return;
+            } else {
+                setNewRecipe({
+                    ...newRecipe,
+                    diets: [...newRecipe.diets, newDietLowerCase]
+                });
+                setNewDiet('');
+            }
         }
 
         //pass to validation f() once the data package is ready in var newRecipe - errors will be logged on errors object
@@ -124,6 +135,7 @@ const FormPage = () => {
             {errors.name1 && <span className={styles.errors} >{errors.name1}</span>}
             {errors.name2 && <span className={styles.errors} >{errors.name2}</span>}
             {errors.name3 && <span className={styles.errors} >{errors.name3}</span>}
+            {/* {errors.name4 && <span className={styles.errors} >{errors.name4}</span>} */}
             <br />
 
             <label>Image: </label>

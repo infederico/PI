@@ -62,7 +62,7 @@ const validation = (recipeData) => {
     //DIETS
     if (diets.length === 0) {
         errors.diets = 'Every new recipe must have at least 1 diet associated to it';
-    } // developer decision - every new recipe crated must have at least 1 diet associated to it
+    } // requisito readme - every new recipe crated must have at least 1 diet associated to it
 
 
     return errors;
