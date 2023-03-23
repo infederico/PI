@@ -4,6 +4,8 @@ import { addRecipe } from '../../redux/actions';
 
 import styles from './FormPage.module.css';
 
+import validation from './validation';
+
 const FormPage = () => {
 
     const dispatch = useDispatch();
@@ -21,6 +23,8 @@ const FormPage = () => {
     });
 
     const [ newDiet, setNewDiet ] = useState('');
+
+    const [ errors, setErrors ] = useState({});
 
     const handleChange = (event) => {
         const { name, type, checked, value } = event.target;
@@ -48,7 +52,9 @@ const FormPage = () => {
     };
 
     const handleSubmit = (event) => {
-        
+        event.preventDefault();
+
+        //check if user add custo diets and add to diets array before dispatch, then clean the other diets input box so the user can continue adding more custom diets
         if (newDiet) {
             setNewRecipe({
                 ...newRecipe,
@@ -56,21 +62,38 @@ const FormPage = () => {
             });
             setNewDiet('');
         }
-        dispatch(addRecipe(newRecipe))
-        alert('Recipe added successfully');
-        event.preventDefault();
-        //clean local states after sending all data to create a new recipe
-        setNewRecipe({
-            name: '',
-            image: '',
-            summary: '',
-            healthScore: 0,
-            instructions: '',
-            vegetarian: false,
-            vegan: false,
-            glutenFree: false,
-            diets: [],
-        });
+
+        //pass to validation f() once the data package is ready in var newRecipe - errors will be logged on errors object
+        let aux = validation(newRecipe);
+        setErrors(aux);
+        if ((Object.keys(aux).length) !== 0) {
+            alert('validation error/s');
+            return;
+        }
+
+        // if there is no errors on the process of validation
+        if (Object.keys(aux).length === 0) {
+            //action dispatch - crate new recipe in DB
+            dispatch(addRecipe(newRecipe));
+            //confirm to the user 
+            alert('Recipe created successfully');
+            
+            //clean local state after sending all data
+            setNewRecipe({
+                name: '',
+                image: '',
+                summary: '',
+                healthScore: 0,
+                instructions: '',
+                vegetarian: false,
+                vegan: false,
+                glutenFree: false,
+                diets: [],
+            });
+            // clean error log local state
+            setErrors({});
+            return;
+        }
     };
 
     return (
@@ -78,10 +101,16 @@ const FormPage = () => {
 
             <label>Name: </label>
             <input type='text' name='name' onChange={handleChange} value={newRecipe.name} />
+            {errors.name1 && <span className={styles.errors} >{errors.name1}</span>}
+            {errors.name2 && <span className={styles.errors} >{errors.name2}</span>}
+            {errors.name3 && <span className={styles.errors} >{errors.name3}</span>}
             <br />
 
             <label>Image: </label>
             <input type='text' name='image' onChange={handleChange} value={newRecipe.image} />
+            {errors.image1 && <p className={styles.errors} >{errors.image1}</p>}
+            {errors.image2 && <p className={styles.errors} >{errors.image2}</p>}
+            {errors.image3 && <p className={styles.errors} >{errors.image3}</p>}
             <br />
 
             <label>Summary: </label>
