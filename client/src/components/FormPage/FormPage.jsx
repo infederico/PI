@@ -14,7 +14,7 @@ const FormPage = () => {
         name: '',
         image: '',
         summary: '',
-        healthScore: 0,
+        healthScore: '',
         instructions: '',
         vegetarian: false,
         vegan: false,
@@ -25,6 +25,8 @@ const FormPage = () => {
     const [ newDiet, setNewDiet ] = useState('');
 
     const [ errors, setErrors ] = useState({});
+
+    const [submitted, setSubmitted] = useState(false);
 
     const handleChange = (event) => {
         const { name, type, checked, value } = event.target;
@@ -40,6 +42,8 @@ const FormPage = () => {
                 ...newRecipe,
                 [name]: value,
             });
+            //check submitted state for prevent errors to render at the first change on form - after it will allow errors rendering after first submit 
+            if (submitted) setErrors(validation({ ...newRecipe, [name]: value }));
         }
     };
 
@@ -68,6 +72,8 @@ const FormPage = () => {
         setErrors(aux);
         if ((Object.keys(aux).length) !== 0) {
             alert('Please follow the instructions to correct data errors');
+            //set submitted state in true to allow errors rendering after first submit attemp
+            setSubmitted(true);
             return;
         }
 
@@ -83,7 +89,7 @@ const FormPage = () => {
                 name: '',
                 image: '',
                 summary: '',
-                healthScore: 0,
+                healthScore: '',
                 instructions: '',
                 vegetarian: false,
                 vegan: false,
@@ -92,6 +98,8 @@ const FormPage = () => {
             });
             // clean error log local state
             setErrors({});
+            //reset the local state once the new recipe was created successfully to permi a good user experience and dont show errors until first submit attemp
+            setSubmitted(false);
             return;
         }
     };
@@ -131,7 +139,7 @@ const FormPage = () => {
             <br />
 
             <label>Diets: </label>
-
+            {errors.diets && <span className={styles.errors} >{errors.diets}</span>}
             <br />
             <input type='checkbox' name='vegetarian' onChange={handleChange} value='vegetarian' checked={newRecipe.diets.includes('vegetarian')} />Vegetarian 
             <input type='checkbox' name='vegan' onChange={handleChange} value='vegan' checked={newRecipe.diets.includes('vegan')} />Vegan 

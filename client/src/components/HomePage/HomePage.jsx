@@ -25,7 +25,7 @@ const searchResult = data;
 
 const HomePage = () => {
     let [ currentPage, setCurrentPage ] = useState(0);
-    let [ selectedSortOption, setSelectedSortOption ] = useState(null);
+    let [ selectedSortOption, setSelectedSortOption ] = useState(undefined);
     
     // const filteredResult = [];
 // const doubleFilteredResult = [];

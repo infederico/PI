@@ -1,5 +1,5 @@
 const validation = (recipeData) => {
-    let { name, image, summary, healthScore, instructions } = recipeData;
+    let { name, image, summary, healthScore, instructions, diets } = recipeData;
     let errors = {};
     
     
@@ -43,8 +43,8 @@ const validation = (recipeData) => {
     if (!healthScore) {
         errors.healthScore1 = 'This field is required';
     } // DB requirement - allowNull: false  
-    
-    if (!Number.isInteger(healthScore)) {
+
+    if (!(Number.isInteger(Number(healthScore)))) {
         errors.healthScore2 = 'Health Score must be an integer number';
     } // DB requirement - type: DataTypes.INTEGER - must be an integer
     
@@ -57,6 +57,12 @@ const validation = (recipeData) => {
     if (!instructions) {
         errors.instructions = 'This field is required';
     } // DB requirement - allowNull: false, type: DataTypes.TEXT - unlimited characters
+
+
+    //DIETS
+    if (diets.length === 0) {
+        errors.diets = 'Every new recipe must have at least 1 diet associated to it';
+    } // developer decision - every new recipe crated must have at least 1 diet associated to it
 
 
     return errors;
