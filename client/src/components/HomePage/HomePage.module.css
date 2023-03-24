@@ -1,13 +1,11 @@
 .light {
     background-color: var(--primary-color-200);
     background-size: cover;
-    height: 100vh;
 }
 
 .dark {
     background-color: var(--primary-color-800);
     background-size: cover;
-    height: 100vh;
 }
 
 .cards  {

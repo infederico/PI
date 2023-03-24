@@ -13,16 +13,20 @@ const RecipeCard = (props) => {
     const theme = useSelector(state => state.theme);
 
     return (
-        <div className={styles.card}>
+        <div className={ theme ? styles.lightCard : styles.darkCard }>
            
-            <label className={styles.label}>health score: {healthScore}</label>
+            <label className={ theme ? styles.lightLabel : styles.darkLabel }>health score: {healthScore}</label>
             <br />
-            <label className={styles.label}>name: </label>
-            <h5 className={styles.name}>{name}</h5>
-            {/* <img src={image} alt={name} /> */}
-            <label className={styles.label}>diets: </label> 
+
+            <label className={ theme ? styles.lightLabel : styles.darkLabel }>name: </label>
+
+            <h5 className={ theme ? styles.lightName : styles.darkName }>{name}</h5>
+
+            <img src={image} alt={name} className={styles.image} />
+
+            <label className={ theme ? styles.lightLabel : styles.darkLabel }>diets: </label> 
             {
-                diets?.map((diet, index) => <p className={styles.span} key={index}>{diet}</p> )  
+                diets?.map((diet, index) => <p className={ theme ? styles.lightSpan : styles.darkSpan } key={index}>{diet}</p> )  
             }
         </div>
     );
