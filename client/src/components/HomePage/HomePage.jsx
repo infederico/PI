@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 // eslint-disable-next-line
 import { useSelector, useDispatch } from "react-redux";
 // eslint-disable-next-line
-import { search } from "../../redux/actions";
+import { getRecipes, getDiets } from "../../redux/actions";
 import styles from './HomePage.module.css';
 import RecipeCard from "../RecipeCard/RecipeCard";
 
@@ -19,17 +19,21 @@ const HomePage = () => {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     const dispatch = useDispatch();
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
     const theme = useSelector(state => state.theme);
-    
+    const searchResult = useSelector(state => state.searchResult);
+    const searchError = useSelector(state => state.searchError);
+    const diets = useSelector(state => state.diets);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    useEffect( () => {
+       dispatch(getRecipes())
+       dispatch(getDiets())
+    // eslint-disable-next-line
+    }, []);
+
     let [ currentPage, setCurrentPage ] = useState(1);
     let [ selectedSortOption, setSelectedSortOption ] = useState(undefined);
-    
-    
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    const searchResult = useSelector(state => state.searchResult);
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+  
     // const filteredResult = [];
     // const doubleFilteredResult = [];
     // const toOrderResult = [];
@@ -44,16 +48,7 @@ const HomePage = () => {
       
     const sortedResult = selectedSortOption ? searchResult.slice().sort(sortFunctions[selectedSortOption]) : searchResult;
       
-      
-
     const paginatedResult = sortedResult.slice(((currentPage * 9) - 9), (currentPage * 9));
-
-    useEffect( () => {
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-       dispatch(search());
-       ////////////////////////////////////////////////////////////////////////////////////////////////
-    // eslint-disable-next-line
-    }, []);
 
     const pageIncrement = () => {
         if (currentPage < 12) {
@@ -74,18 +69,18 @@ const HomePage = () => {
     };
 
     /////////////////////////////////// go to top button /////////////////////////////////////////////
-    const [showButton, setShowButton] = useState(false);
-    const handleScroll = () => {
-        if (window.pageYOffset > 300) {
-        setShowButton(true);
-        } else {
-        setShowButton(false);
-        }
-    };
-    const handleButtonClick = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-    window.addEventListener('scroll', handleScroll);
+    // const [showButton, setShowButton] = useState(false);
+    // const handleScroll = () => {
+    //     if (window.pageYOffset > 300) {
+    //     setShowButton(true);
+    //     } else {
+    //     setShowButton(false);
+    //     }
+    // };
+    // const handleButtonClick = () => {
+    //     window.scrollTo({ top: 0, behavior: 'smooth' });
+    // };
+    // window.addEventListener('scroll', handleScroll);
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (
@@ -94,6 +89,9 @@ const HomePage = () => {
             <button onClick={pageDecrement}>-</button>
             <span>{`     ${currentPage}     `}</span>
             <button onClick={pageIncrement}>+</button>
+
+            {searchError && <span className={styles.error}>{searchError}</span>}
+            {!searchError && searchResult.length !== 0 && <span className={styles.error}>{`${searchResult.length} recipes found`}</span>}
 
             <div>
                 <label htmlFor="sort">Sort by:</label>
@@ -105,7 +103,11 @@ const HomePage = () => {
                     <option value="Name - des.">Name - asc. (Z to A)</option>
                 </select>
             </div>
-    
+
+
+            <div>{diets[2]?.name}</div>
+
+
             <span className={styles.cards} >
                 {
                     paginatedResult?.map((result) => {
@@ -121,7 +123,7 @@ const HomePage = () => {
                 }
             </span>
 
-            {showButton && (<button onClick={handleButtonClick}>Go to top</button>)}
+            {/* {showButton && (<button onClick={handleButtonClick}>Go to top</button>)} */}
 
         </div>
     );

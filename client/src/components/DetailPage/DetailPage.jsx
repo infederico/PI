@@ -11,7 +11,7 @@ const DetailPage = () => {
     const { idRecipe } = useParams();
 
     const recipeDetail = useSelector(state => state.recipeDetail);
-    const { id, name, title, image, summary, healthScore, instructions, diets } = recipeDetail;
+    const { name, title, image, summary, healthScore, instructions, diets } = recipeDetail;
     
     useEffect( () => {
         dispatch(getRecipeDetail(idRecipe));
@@ -21,7 +21,6 @@ const DetailPage = () => {
     // eslint-disable-next-line
     }, []);
 
-    console.log(summary);
     const stripHtmlTags = (html) => {
         if (!html) return ""; // return empty string if html is undefined or null
         const strippedHtml = html.replace(/(<([^>]+)>)/gi, "");
@@ -29,18 +28,13 @@ const DetailPage = () => {
     };
 
     let strippedSummary = stripHtmlTags(summary);
-    console.log(strippedSummary);
-
+  
     return (
         <div>
-            <label>id: </label>
-            <h4>{id}</h4>
             <label>name: </label>
-            <h4>{name}</h4>
-            <label>title: </label>
-            <h4>{title}</h4>
+            <h4>{name || title}</h4>
             <label>image: </label>
-            <img src={image} alt={ name? name : title } />
+            <img src={image} alt={name || title} />
             <label>summary: </label>
             <h4>{strippedSummary}</h4>
             <label>healthScore: </label>
@@ -49,8 +43,8 @@ const DetailPage = () => {
             <h4>{instructions}</h4>
             <label>diets: </label>
             {
-                diets?.map( diet => {
-                    return <h4>{diet}</h4>
+                diets?.map( (diet, index) => {
+                    return <h4 key={index}>{diet}</h4>
                 })
             }
             

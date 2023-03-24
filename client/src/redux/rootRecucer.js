@@ -1,6 +1,6 @@
 import { 
     TOGGLE_THEME,
-    SEARCH,
+    SEARCH_SUCCESS, SEARCH_FAIL, CLEAN_SEARCH_ERROR, GET_RECIPES, GET_DIETS,
     GET_RECIPE_DETAIL,
     ADD_RECIPE, ADD_BACKEND_ERRORS, CLEAN_RECIPE_DETAIL, CLEAN_RECIPE_JUST_CREATED, CLEAN_BACKEND_ERRORS } from "./actions-types";
 
@@ -9,6 +9,8 @@ const initialState = {
     theme: true,
 
     searchResult: [],
+    searchError: '',
+    diets: [],
 
     recipeDetail: {},
 
@@ -24,10 +26,30 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 theme: !state.theme
             }
-        case SEARCH:
+        case SEARCH_SUCCESS:
             return {
                 ...state,
                 searchResult: action.payload
+            }
+        case SEARCH_FAIL:
+            return {
+                ...state,
+                searchError: action.payload
+            }
+        case CLEAN_SEARCH_ERROR:
+            return {
+                ...state,
+                searchError: ''
+            }
+        case GET_RECIPES:
+            return {
+                ...state,
+                searchResult: action.payload
+            }
+        case GET_DIETS:
+            return {
+                ...state,
+                diets: action.payload
             }
         case GET_RECIPE_DETAIL:
             return {
@@ -46,7 +68,7 @@ const rootReducer = (state = initialState, action) => {
             }
         case CLEAN_RECIPE_JUST_CREATED:
             return {
-                ...state,
+                ...state, 
                 recipeJustCreated: {}
             }
         case ADD_BACKEND_ERRORS:

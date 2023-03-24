@@ -2,7 +2,7 @@ import styles from './SearchBar.module.css';
 import '../../assets/css variables/variables.css';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { search } from '../../redux/actions';
+import { searchRecipe, cleanSearchError } from '../../redux/actions';
 import lightSearchIcon from '../../assets/images/light-search-icon.png';
 import darkSearchIcon from '../../assets/images/dark-search-icon.png';
 
@@ -18,8 +18,11 @@ const SearchBar = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(search(query));
-    setQuery('');
+    dispatch(cleanSearchError())
+    if (query) {
+      dispatch(searchRecipe(query));
+      setQuery('');
+    } else return;
   };
 
   return (
