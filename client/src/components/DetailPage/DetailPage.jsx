@@ -6,23 +6,33 @@ import { getRecipeDetail } from '../../redux/actions';
 import { cleanRecipeDetail } from '../../redux/actions';
 
 const DetailPage = () => {
-
-    const recipeDetail = useSelector(state => state.recipeDetail);
+    
     const dispatch = useDispatch();
     const { idRecipe } = useParams();
+
+    const recipeDetail = useSelector(state => state.recipeDetail);
+    const { id, name, title, image, summary, healthScore, instructions, diets } = recipeDetail;
     
     useEffect( () => {
         dispatch(getRecipeDetail(idRecipe));
         return () => {
             dispatch(cleanRecipeDetail());
         }
-    }, [dispatch, idRecipe]);
-// eslint-disable-next-line
-    const { id, name, title, image, summary, healthScore, instructions, vegetarian, vegan, glutenFree, diets } = recipeDetail;
+    // eslint-disable-next-line
+    }, []);
+
+    console.log(summary);
+    const stripHtmlTags = (html) => {
+        if (!html) return ""; // return empty string if html is undefined or null
+        const strippedHtml = html.replace(/(<([^>]+)>)/gi, "");
+        return strippedHtml;
+    };
+
+    let strippedSummary = stripHtmlTags(summary);
+    console.log(strippedSummary);
 
     return (
         <div>
-            <h2>DETAIL PAGE</h2>
             <label>id: </label>
             <h4>{id}</h4>
             <label>name: </label>
@@ -32,7 +42,7 @@ const DetailPage = () => {
             <label>image: </label>
             <img src={image} alt={ name? name : title } />
             <label>summary: </label>
-            <h4>{summary}</h4>
+            <h4>{strippedSummary}</h4>
             <label>healthScore: </label>
             <h4>{healthScore}</h4>
             <label>instructions: </label>

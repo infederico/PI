@@ -8,8 +8,8 @@
 }
 
 .lightCard:hover {
-    transform: scale(1.01);
-    transition: all 0.4s ease;
+    transform: scale(0.995);
+    transition: all 0.4s ease-in-out;
     border: solid 2px var(--secondary-color-700);
 }
 
