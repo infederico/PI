@@ -17,6 +17,10 @@ const validation = (recipeData) => {
         errors.name3 = 'This field support up to 255 characters'
     } // DB requirement - type: DataTpes.STRING, by default 255 characters supported
     
+    // if (???) {
+    //     errors.name4 = 'This recipe name already exist, please choose another one'
+    // } // extra credits - dont allow to create new recipes that repeat the name of another from the DB
+    
     
     //IMAGE
     if (!image) {

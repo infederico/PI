@@ -1,4 +1,5 @@
 // eslint-disable-next-line
+import React from "react";
 import { useEffect, useState } from "react";
 // eslint-disable-next-line
 import { useSelector, useDispatch } from "react-redux";
@@ -10,13 +11,13 @@ import styles from './HomePage.module.css';
 import RecipeCard from "../RecipeCard/RecipeCard";
 
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //mockeado de api response para cuando se acaba la quote de request por dia permitidiso por la api (150/dia)
 import { data } from '../../api_res.json'
-
+console.log(data);
 // eslint-disable-next-line
 const searchResult = data;
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -24,13 +25,23 @@ const searchResult = data;
 
 
 const HomePage = () => {
-    let [ currentPage, setCurrentPage ] = useState(0);
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // const dispatch = useDispatch();
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    let [ currentPage, setCurrentPage ] = useState(1);
     let [ selectedSortOption, setSelectedSortOption ] = useState(undefined);
     
+    const theme = useSelector(state => state.theme);
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // const searchResult = useSelector(state => state.searchResult);
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     // const filteredResult = [];
-// const doubleFilteredResult = [];
-// const toOrderResult = [];
-    //const sortedResult = searchResult.sort((p1, p2) => (p1.healthScore < p2.healthScore) ? 1 : (p1.healthScore > p2.healthScore ? -1 : 0));
+    // const doubleFilteredResult = [];
+    // const toOrderResult = [];
+    // const sortedResult = searchResult.sort((p1, p2) => (p1.healthScore < p2.healthScore) ? 1 : (p1.healthScore > p2.healthScore ? -1 : 0));
 
     const sortedResult = selectedSortOption ? searchResult.slice().sort((a, b) => {
         if (selectedSortOption === 'Health Score - des.') {
@@ -43,26 +54,27 @@ const HomePage = () => {
         }
       }) : searchResult;
 
-
-
     const paginatedResult = sortedResult.slice((currentPage * 9), (currentPage * 9 + 9));
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    const theme = useSelector(state => state.theme);
-    //const searchResult = useSelector(state => state.searchResult);
-    //const dispatch = useDispatch();
 
     useEffect( () => {
-    //     dispatch(search());
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+       // dispatch(search());
+       ////////////////////////////////////////////////////////////////////////////////////////////////
+    // eslint-disable-next-line
     }, [currentPage, selectedSortOption]);
 
     const pageIncrement = () => {
-        currentPage = currentPage + 1;
-        setCurrentPage(currentPage)
+        if (currentPage < 12) {
+            currentPage = currentPage + 1;
+            setCurrentPage(currentPage);
+        }
     };
 
     const pageDecrement = () => {
-        currentPage = currentPage -1;
-        setCurrentPage(currentPage)
+        if (1 < currentPage) {
+            currentPage = currentPage -1;
+            setCurrentPage(currentPage);
+        }
     };
 
     const handleSortOptionChange = (event) => {
@@ -72,6 +84,7 @@ const HomePage = () => {
 
 
     return (
+        <React.StrictMode>
         <div className={ theme ? styles.light : styles.dark}>
 
             <button onClick={pageDecrement}>-</button>
@@ -80,6 +93,7 @@ const HomePage = () => {
             <div>
                 <label htmlFor="sort">Sort by:</label>
                 <select id="sort" value={selectedSortOption} onChange={handleSortOptionChange}>
+                    {/* <option value=""></option> */}
                     <option value="Health Score - asc.">Health Score (max to min)</option>
                     <option value="Health Score - des.">Health Score (min to max)</option>
                     
@@ -94,7 +108,7 @@ const HomePage = () => {
                         return <RecipeCard
                             key={result.id}
                             healthScore={result.healthScore}
-                            name={result.name}
+                            name={result.name || result.title}
                             image={result.image}
                             diets={result.diets}
                             />
@@ -102,6 +116,7 @@ const HomePage = () => {
                 }
             </span>
         </div>
+        </React.StrictMode>
     );
 };
 

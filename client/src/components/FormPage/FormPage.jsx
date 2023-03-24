@@ -49,7 +49,7 @@ const FormPage = () => {
                 ...newRecipe,
                 [name]: value,
             });
-            //check submitted state for prevent errors to render at the first change on form - after it will allow errors rendering after first submit 
+            //UX enhance - check submitted state for prevent errors to render at the first change on form - after it will allow errors rendering after first submit 
             if (submitted) setErrors(validation({ ...newRecipe, [name]: value }));
         }
     };
@@ -73,6 +73,7 @@ const FormPage = () => {
         // reset global states that tracks recipe creation errors and success
         dispatch(cleanRecipeJustCreated());
         //dispatch(cleanBackendErrors());
+
         //check if user add custom diets and add to diets array before dispatch, then clean the other diets input box so the user can continue adding more custom diets
         const newDietLowerCase = newDiet.toLowerCase();
         if (newDiet) {
@@ -87,7 +88,7 @@ const FormPage = () => {
             }
         }
 
-        //pass to validation f() once the data package is ready in var newRecipe - errors will be logged on errors object
+        //pass to validation f() once the data package is ready in var newRecipe - errors will be logged on errors lcoal state
         let aux = validation(newRecipe);
         setErrors(aux);
         if ((Object.keys(aux).length) !== 0) {
@@ -115,10 +116,9 @@ const FormPage = () => {
             });
             // clean error log local state
             setErrors({});
-            //reset the local state once the new recipe was created successfully to permi a good user experience and dont show errors until first submit attemp
+            //reset the local state once the new recipe was created successfully to permit a good user experience and dont show errors until first submit attemp in the next recipe user load
             setSubmitted(false);
-            //confirm to the user in screen and recipeJustCreated detail on browser console
-            //if (!recipeJustCreated.name) {alert('Recipe created successfully');}
+            
             return;
         }
     };
@@ -185,7 +185,7 @@ const FormPage = () => {
             <br />
 
             {recipeJustCreated.name && <span className={styles.errors}>{`${recipeJustCreated.name} has been created successfully`}</span>}
-            {backendErrors && <span className={styles.errors}>{`Recipe submitted but not crated due server error. ${backendErrors}`}</span>}
+            {backendErrors && <span className={styles.errors}>{`Recipe submitted but not created due server error. ${backendErrors}`}</span>}
 
             <button type='submit'>Create recipe</button>
             <br />
@@ -194,14 +194,3 @@ const FormPage = () => {
 };
 
 export default FormPage;
-
-
-
-
-
-
-
-  
-  
-  
-

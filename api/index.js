@@ -23,7 +23,7 @@ const { conn } = require('./src/db.js');
 const saveApiData = require('./src/controllers/saveApiData');
 
 // Syncing database
-conn.sync({ force: true }).then( async () => {
+conn.sync({ force: false }).then( async () => {
 
    console.log('DB connected');
    console.time('DB load time'); // Start the timer
