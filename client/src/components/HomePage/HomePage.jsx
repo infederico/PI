@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 // eslint-disable-next-line
 import { useSelector, useDispatch } from "react-redux";
 // eslint-disable-next-line
@@ -24,6 +24,7 @@ const searchResult = data;
 
 
 const HomePage = () => {
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // const dispatch = useDispatch();
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,6 +97,20 @@ const HomePage = () => {
 
     };
 
+    /////////////////////////////////// go to top button /////////////////////////////////////////////
+    const [showButton, setShowButton] = useState(false);
+    const handleScroll = () => {
+        if (window.pageYOffset > 300) {
+        setShowButton(true);
+        } else {
+        setShowButton(false);
+        }
+    };
+    const handleButtonClick = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    window.addEventListener('scroll', handleScroll);
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (
         <div className={ theme ? styles.light : styles.dark}>
@@ -118,12 +133,12 @@ const HomePage = () => {
                 </select>
             </div>
     
-           
             <span className={styles.cards} >
                 {
                     paginatedResult?.map((result) => {
                         return <RecipeCard
                             key={result.id}
+                            id={result.id}
                             healthScore={result.healthScore}
                             name={result.name || result.title}
                             image={result.image}
@@ -132,6 +147,9 @@ const HomePage = () => {
                     })
                 }
             </span>
+
+            {showButton && (<button onClick={handleButtonClick}>Go to top</button>)}
+
         </div>
     );
 };

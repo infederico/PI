@@ -5,7 +5,32 @@
     text-align: left;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 600;
-    width: 25%;
+}
+
+.lightCard:hover {
+    transform: scale(1.01);
+    transition: all 0.4s ease;
+    border: solid 2px var(--secondary-color-700);
+}
+
+
+.lightName {
+    font-size: larger;
+    color: var(--primary-color-900);
+}
+
+.lightName:hover {
+    cursor: pointer;
+}
+
+.lightSpan {
+    font-size: medium;
+    color: var(--primary-color-800);
+}
+
+.lightLabel {
+    font-size: small;
+    color: var(--secondary-color-800);
 }
 
 .darkCard {
@@ -15,13 +40,13 @@
     text-align: left;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 600;
-    width: 25%;
     align-items: center;
 }
 
-.lightName {
-    font-size: larger;
-    color: var(--primary-color-800);
+.darkCard:hover {
+    transform: scale(1.01);
+    transition: all 0.4s ease;
+    border: solid 2px var(--secondary-color-200);
 }
 
 .darkName {
@@ -29,9 +54,8 @@
     color: var(--primary-color-200);
 }
 
-.lightSpan {
-    font-size: medium;
-    color: var(--primary-color-600);
+.darkName:hover {
+    cursor: pointer;
 }
 
 .darkSpan {
@@ -39,10 +63,6 @@
     color: var(--primary-color-200);
 }
 
-.lightLabel {
-    font-size: small;
-    color: var(--primary-color-600);
-}
 
 .darkLabel {
     font-size: small;
