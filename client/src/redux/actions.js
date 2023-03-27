@@ -2,6 +2,8 @@ import axios from 'axios';
 import { 
   TOGGLE_THEME,
   SEARCH_SUCCESS, SEARCH_FAIL, CLEAN_SEARCH_ERROR, GET_RECIPES, GET_DIETS,
+  FILTER_BY_ORIGIN_ALL, FILTER_BY_ORIGIN_API, FILTER_BY_ORIGIN_DB,
+  FILTER_BY_DIET_ALL, FILTER_BY_DIET_VEGAN, FILTER_BY_DIET_VEGETARIAN, FILTER_BY_DIET_GLUTENFREE,
   GET_RECIPE_DETAIL, CLEAN_RECIPE_DETAIL,
   ADD_RECIPE, ADD_BACKEND_ERRORS, CLEAN_RECIPE_JUST_CREATED, CLEAN_BACKEND_ERRORS } from "./actions-types";
 
@@ -100,4 +102,41 @@ export const getDiets = () => async (dispatch) => {
     console.log(error.message);
   }
 };
+
+
+export const filterByOriginAll = () => {
+  return { type: FILTER_BY_ORIGIN_ALL };
+};
+
+
+export const filterByOriginApi = () => {
+  return { type: FILTER_BY_ORIGIN_API };
+};
+
+
+export const filterByOriginDb = () => {
+  return { type: FILTER_BY_ORIGIN_DB };
+};
+
+
+export const filterByDietAll = () => {
+  return { type: FILTER_BY_DIET_ALL };
+};
+
+
+export const filterByDietVegan = () => {
+  return { type: FILTER_BY_DIET_VEGAN };
+};
+
+
+export const filterByDietVegetarian = () => {
+  return { type: FILTER_BY_DIET_VEGETARIAN };
+};
+
+
+export const filterByDietGlutenfree = () => {
+  return { type: FILTER_BY_DIET_GLUTENFREE };
+};
+
+
 
