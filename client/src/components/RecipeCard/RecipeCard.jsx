@@ -20,11 +20,10 @@ const RecipeCard = (props) => {
             <br />
 
             <label className={ theme ? styles.lightLabel : styles.darkLabel }>name: </label>
+            <h5 className={ theme ? styles.lightName : styles.darkName }>{name}</h5>
             <NavLink to={`/detail/${id}`}>
-                <h5 className={ theme ? styles.lightName : styles.darkName }>{name}</h5>
+                <img src={image} alt={name} className={styles.image} />
             </NavLink>
-
-            <img src={image} alt={name} className={styles.image} />
             <br />
 
             <label className={ theme ? styles.lightLabel : styles.darkLabel }>diets: </label> 

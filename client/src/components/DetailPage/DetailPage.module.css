@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,700&family=Lora&display=swap');
+
+
+.containerLight{
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    font-family: 'Lora', serif;
+    background-color: var(--primary-color-200);
+    background-size: cover;
+}
+
+.containerDark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    font-family: 'Lora', serif;
+    background-color: var(--primary-color-800);
+    background-size: cover;
+}
+  
+.headerLight {
+    font-family: 'EB Garamond', serif;
+    font-weight: 700;
+    font-size: 1.5rem; 
+    margin-bottom: 8px;
+}
+
+.headerDark {
+    font-family: 'EB Garamond', serif;
+    font-weight: 700;
+    font-size: 1.5rem; 
+    margin-bottom: 8px;
+}
+  
+.body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+  
+.imageContainer {
+    width: 50%;
+    height: 100%;
+    margin-right: 20px;
+  }
+  
+.imageContainer img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+.infoContainer {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+.infoItem {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+.infoItem label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+.infoItem p {
+    font-size: 1.1rem;
+    margin-top: 0;
+  }
+  
+.dietsContainer {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+.dietsContainer span {
+    font-size: 1.1rem;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background-color: #f1f1f1;
+    border-radius: 20px;
+}
+  
