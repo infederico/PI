@@ -11,7 +11,7 @@ const DetailPage = () => {
     const { idRecipe } = useParams();
 
     const recipeDetail = useSelector(state => state.recipeDetail);
-    const { name, title, image, summary, healthScore, instructions, diets } = recipeDetail;
+    const { name, image, summary, healthScore, instructions, diets } = recipeDetail;
     
     useEffect( () => {
         dispatch(getRecipeDetail(idRecipe));
@@ -32,9 +32,9 @@ const DetailPage = () => {
     return (
         <div>
             <label>name: </label>
-            <h4>{name || title}</h4>
+            <h4>{name}</h4>
             <label>image: </label>
-            <img src={image} alt={name || title} />
+            <img src={image} alt={name} />
             <label>summary: </label>
             <h4>{strippedSummary}</h4>
             <label>healthScore: </label>

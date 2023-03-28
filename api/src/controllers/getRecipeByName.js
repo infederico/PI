@@ -28,9 +28,9 @@ const getRecipeByName = async (name) => {
                         id: recipe?.id,
                         name: recipe?.name,
                         image: recipe?.image,
-                        summary: recipe?.summary,
+                        //summary: recipe?.summary,
                         healthScore: recipe?.healthScore,
-                        instructions: recipe?.instructions,
+                        //instructions: recipe?.instructions,
                         diets: recipe.Diets?.map((diet) => diet.name),
                         vegetarian: recipe.Diets?.map((diet) => diet.name).includes('vegetarian'),
                         vegan: recipe.Diets?.map((diet) => diet.name).includes('vegan'),
@@ -38,10 +38,27 @@ const getRecipeByName = async (name) => {
                     };
                     dbResults.push(recipeData);
                 })
-            }
-            const apiResponse = /*{ data: { results: [] } }*/ await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${name}&addRecipeInformation=true&number=100&apiKey=${API_KEY}`);
-        
-            const apiResults = apiResponse.data.results;
+            };
+            ///////////////////////////////////////////////////////mockeo de api respnse para cuando se acaba el credito diario
+            const apiResponse = require('../mock/api_res.json');//await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${name}&addRecipeInformation=true&number=100&apiKey=${API_KEY}`);
+            let apiResults = [];
+            if (apiResponse) {
+                apiResponse.data.results?.map((recipe) => {
+                    let recipeData = {
+                        id: recipe?.id,
+                        name: recipe?.title || recipe?.name,
+                        image: recipe?.image,
+                        //summary: recipe?.summary,
+                        healthScore: recipe?.healthScore,
+                        //instructions: recipe?.instructions,
+                        diets: recipe?.diets,
+                        vegetarian: recipe?.vegetarian,
+                        vegan: recipe?.vegan,
+                        glutenFree: recipe?.glutenFree,
+                    };
+                    apiResults.push(recipeData);
+                })
+            };
 
             const results = [...apiResults, ...dbResults];
             
@@ -49,9 +66,26 @@ const getRecipeByName = async (name) => {
         
             return results;
         } else {
-            const apiResponse = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=&addRecipeInformation=true&number=100&apiKey=${API_KEY}`);
-        
-            const apiResults = apiResponse.data.results;
+            ///////////////////////////////////////////////////////mockeo de api respnse para cuando se acaba el credito diario
+            const apiResponse = require('../mock/api_res.json'); // await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=&addRecipeInformation=true&number=100&apiKey=${API_KEY}`);
+            let apiResults = [];
+            if (apiResponse) {
+                apiResponse.data.results?.map((recipe) => {
+                    let recipeData = {
+                        id: recipe?.id,
+                        name: recipe?.title || recipe?.name,
+                        image: recipe?.image,
+                        //summary: recipe?.summary,
+                        healthScore: recipe?.healthScore,
+                        //instructions: recipe?.instructions,
+                        diets: recipe?.diets,
+                        vegetarian: recipe?.vegetarian,
+                        vegan: recipe?.vegan,
+                        glutenFree: recipe?.glutenFree,
+                    };
+                    apiResults.push(recipeData);
+                })
+            };
 
             return apiResults;
         }

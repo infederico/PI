@@ -1,27 +1,34 @@
 import { 
     TOGGLE_THEME,
-    SEARCH_SUCCESS, SEARCH_FAIL, CLEAN_SEARCH_ERROR, GET_RECIPES, GET_DIETS,
-    FILTER_BY_ORIGIN_ALL, FILTER_BY_ORIGIN_API, FILTER_BY_ORIGIN_DB,
-    FILTER_BY_DIET_ALL, FILTER_BY_DIET_VEGAN, FILTER_BY_DIET_VEGETARIAN, FILTER_BY_DIET_GLUTENFREE,
+    SEARCH_SUCCESS, SEARCH_FAIL, CLEAN_SEARCH_ERROR, GET_RECIPES, GET_DIETS, 
+    SET_SELECTED_DIET, FILTER_BY_DIET_ALL, FILTER_BY_DIET_VEGAN, FILTER_BY_DIET_VEGETARIAN, FILTER_BY_DIET_GLUTENFREE, FILTER_BY_DIET_CUSTOM,
+    SET_SELECTED_ORIGIN, FILTER_BY_ORIGIN_ALL, FILTER_BY_ORIGIN_API, FILTER_BY_ORIGIN_DB, SET_DOUBLE_FILTERED_RESULT,
+    SET_SELECTED_SORT_OPTION, SET_CURRENT_PAGE,
     GET_RECIPE_DETAIL,
     ADD_RECIPE, ADD_BACKEND_ERRORS, CLEAN_RECIPE_DETAIL, CLEAN_RECIPE_JUST_CREATED, CLEAN_BACKEND_ERRORS } from "./actions-types";
 
 const initialState = {
     //general
     theme: true,
+
     //HomePage
     searchResult: [],
     searchError: '',
     //for filtering
     diets: [],
+    selectedDiet: '',
     filteredOneResult: [],
+    selectedOrigin: '',
     filteredTwoResult: [],
     doubleFilteredResult: [],
-    unsortedResult: [],
-    sortedResult: [],
-    paginatedResult: [], // this is the array that finally render the recipes to the users
+    //for sorting
+    selectedSortOption: undefined,
+    //for pagination
+    currentPage: 1,
+
     //DetailPage
     recipeDetail: {},
+    
     //FormPage
     recipeJustCreated: {},
     backendErrors: '',
@@ -59,7 +66,22 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 diets: action.payload
             }
+        case SET_SELECTED_SORT_OPTION:
+            return {
+                ...state,
+                selectedSortOption: action.payload
+            }
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.payload
+            }
 
+        case SET_SELECTED_DIET:
+            return {
+                ...state,
+                selectedDiet: action.payload
+            }
         case FILTER_BY_DIET_ALL:
             return {
                 ...state,
@@ -80,7 +102,17 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 filteredOneResult: state.searchResult?.filter((result) => result.glutenFree === true)
             }
+        case FILTER_BY_DIET_CUSTOM:
+            return {
+                ...state,
+                filteredOneResult: state.searchResult?.filter((result) => result.diets.includes(action.payload))
+            }
 
+        case SET_SELECTED_ORIGIN:
+            return {
+                ...state,
+                selectedOrigin: action.payload
+            }
         case FILTER_BY_ORIGIN_ALL:
             return {
                 ...state,
@@ -95,6 +127,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 filteredTwoResult: state.searchResult?.filter((result) => typeof result.id !== "number")
+            }
+        case SET_DOUBLE_FILTERED_RESULT:
+            return {
+                ...state,
+                doubleFilteredResult: action.payload
             }
 
         case GET_RECIPE_DETAIL:

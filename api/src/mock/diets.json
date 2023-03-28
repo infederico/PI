@@ -1,7 +1,10 @@
 {
     "data": [
         {
-            "name": "glutenFree"
+            "name": "gluten free"
+        },
+        {
+            "name": "dairy free"
         },
         {
             "name": "ketogenic"
@@ -16,22 +19,28 @@
             "name": "ovo-vegetarian"
         },
         {
+            "name": "lacto ovo vegetarian"
+        },
+        {
             "name": "vegan"
         },
         {
-            "name": "pescetarian"
+            "name": "pescatarian"
         },
         {
-            "name": "paleo"
+            "name": "paleolithic"
         },
         {
             "name": "primal"
         },
         {
-            "name": "lowFodmap"
+            "name": "fodmap friendly"
         },
         {
-            "name": "whole30"
+            "name": "whole 30"
+        },
+        {
+            "name": "fruitarian" 
         },
         {
             "name": "omnivore"

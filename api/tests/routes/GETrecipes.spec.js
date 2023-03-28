@@ -6,7 +6,12 @@ const { Recipe, conn } = require('../../src/db.js');
 
 const agent = session(app);
 const recipe = {
-  name: 'Milanea a la napolitana',
+  name: 'Milanesa a la napolitana',
+  image: 'https://example.com/mila-napo.jpg',
+  summary: 'Milanesa de ternera con salsa de tomate y queso muzzarella y jamon',
+  healthScore: 16,
+  instructions: 'llamar a la Farola',
+  diets: ['paleolithic', 'omnivore']
 };
 
 describe('Recipe routes', () => {

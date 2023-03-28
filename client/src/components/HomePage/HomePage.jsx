@@ -1,84 +1,95 @@
-// eslint-disable-next-line
-import React, { useEffect, useState, useRef } from "react";
-// eslint-disable-next-line
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// eslint-disable-next-line
-import { getRecipes, getDiets } from "../../redux/actions";
-import { filterByOriginAll, filterByOriginApi, filterByOriginDb } from "../../redux/actions";
-import { filterByDietAll, filterByDietVegan, filterByDietVegetarian, filterByDietGlutenfree } from "../../redux/actions";
+
+import { getRecipes, getDiets, setSelectedSortOption, setDoubleFilteredResult, setCurrentPage } from "../../redux/actions";
+import { setSelectedDiet, filterByDietAll, filterByDietVegan, filterByDietVegetarian, filterByDietGlutenfree, filterByDietCustom } from "../../redux/actions";
+import { setSelectedOrigin, filterByOriginAll, filterByOriginApi, filterByOriginDb } from "../../redux/actions";
 
 import styles from './HomePage.module.css';
-import RecipeCard from "../RecipeCard/RecipeCard";
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// mockeado de api response para cuando se acaba la quote de request por dia permitidos por la api (150/dia)
-// import { data } from '../../api_res.json'
-// console.log(data);
-// eslint-disable-next-line
-// const searchResult = data;
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import RecipeCard from "../RecipeCard/RecipeCard";
 
 const HomePage = () => {
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     const dispatch = useDispatch();
    
     const theme = useSelector(state => state.theme);
     const searchResult = useSelector(state => state.searchResult);
     const searchError = useSelector(state => state.searchError);
+   
     const diets = useSelector(state => state.diets);
+    const selectedDiet = useSelector(state => state.selectedDiet);
+    const selectedOrigin = useSelector(state => state.selectedOrigin);
     
     const filteredOneResult = useSelector(state => state.filteredOneResult);
     const filteredTwoResult = useSelector(state => state.filteredTwoResult);
     const doubleFilteredResult = useSelector(state => state.doubleFilteredResult);
-    const unsortedResult = useSelector(state => state.unsortedResult);
-    const sortedResult = useSelector(state => state.sortedResult);
-    const paginatedResult = useSelector(state => state.paginatedResult);
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    const selectedSortOption = useSelector(state => state.selectedSortOption);
+    let currentPage = useSelector(state => state.currentPage);
+
+    useEffect(() => {
+        if (searchResult.length === 0) dispatch(getRecipes());
+    }, []);
+
+    useEffect(() => {
+        if (diets.length === 0) dispatch(getDiets());
+      }, []);
+
     useEffect( () => {
-        if (searchResult.length === 0) {
-            dispatch(getRecipes());
+        if (filteredOneResult.length === 0 && filteredTwoResult.length === 0) {
+            dispatch(setDoubleFilteredResult(searchResult));
         }
-        dispatch(getDiets());
-    // eslint-disable-next-line
-    }, []); 
+    }, [searchResult]); 
+    
+    useEffect( () => {
+        const combinedFiltersResult = filteredOneResult?.filter(objA => {
+            const objB = filteredTwoResult?.find(objB => objB.id === objA.id);
+            return objB !== undefined;
+        });
+        dispatch(setDoubleFilteredResult(combinedFiltersResult))
+    }, [filteredOneResult, filteredTwoResult]); 
 
-    let [ currentPage, setCurrentPage ] = useState(1);
-    let [ selectedSortOption, setSelectedSortOption ] = useState(undefined);
-    let [ selectedDiet, setSelectedDiet ] = useState('');
-    let [ selectedOrigin, setSelectedOrigin ] = useState('');
-
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     const sortFunctions = {
         'Health Score - des.': (a, b) => a.healthScore - b.healthScore,
         'Health Score - asc.': (a, b) => b.healthScore - a.healthScore,
-        'Name - asc.': (a, b) => ((a.name || a.title) && (b.name || b.title)) ? (a.name || a.title).localeCompare(b.name || b.title) : 0,
-        'Name - des.': (a, b) => ((a.name || a.title) && (b.name || b.title)) ? (b.name || b.title).localeCompare(a.name || a.title) : 0,
+        'Name - asc.': (a, b) => (a.name && b.name) ? (a.name).localeCompare(b.name) : 0,
+        'Name - des.': (a, b) => (a.name && b.name) ? (b.name).localeCompare(a.name) : 0,
     };
-    
-    //sortedResult = selectedSortOption ? unsortedResult.slice().sort(sortFunctions[selectedSortOption]) : unsortedResult;
-      
-    //paginatedResult = sortedResult.slice(((currentPage * 9) - 9), (currentPage * 9));
+
+    const [ sortedResult, setSortedResult ] = useState([]);
+    const [ paginatedResult, setPaginatedResult ] = useState([]);
+
+    let aux = selectedSortOption ? doubleFilteredResult?.slice().sort(sortFunctions[selectedSortOption]) : doubleFilteredResult
+    useEffect(() => {
+        setSortedResult(aux);
+      }, [doubleFilteredResult, selectedSortOption]);
+
+    let auxBis = sortedResult?.slice(((currentPage * 9) - 9), (currentPage * 9))
+    useEffect(() => {
+        setPaginatedResult(auxBis);
+    }, [sortedResult, currentPage]);
 
     const pageIncrement = () => {
         if (currentPage < 12) {
             currentPage = currentPage + 1;
-            setCurrentPage(currentPage);
+            dispatch(setCurrentPage(currentPage));
         }
     };
 
     const pageDecrement = () => {
         if (1 < currentPage) {
             currentPage = currentPage -1;
-            setCurrentPage(currentPage);
+            dispatch(setCurrentPage(currentPage));
         }
     };
 
     const handleSortOptionChange = (event) => {
-        setSelectedSortOption(event.target.value);
+        dispatch(setSelectedSortOption(event.target.value));
     };
 
     const handleDietChange = (event) => {
-        setSelectedDiet(event.target.value);
+        dispatch(setSelectedDiet(event.target.value));
 
         switch (event.target.value) {
             case '': dispatch(filterByDietAll());
@@ -89,12 +100,12 @@ const HomePage = () => {
             break;
             case 'glutenFree': dispatch(filterByDietGlutenfree());
             break;
-            default: return;
+            default: dispatch(filterByDietCustom(event.target.value));
         }
     };
 
     const handleOriginChange = (event) => {
-        setSelectedOrigin(event.target.value);
+        dispatch(setSelectedOrigin(event.target.value));
     
         switch (event.target.value) {
             case '': dispatch(filterByOriginAll());
@@ -107,23 +118,7 @@ const HomePage = () => {
         }
     };
 
-    /////////////////////////////////// go to top button /////////////////////////////////////////////
-    // const [showButton, setShowButton] = useState(false);
-    // const handleScroll = () => {
-    //     if (window.pageYOffset > 300) {
-    //     setShowButton(true);
-    //     } else {
-    //     setShowButton(false);
-    //     }
-    // };
-    // const handleButtonClick = () => {
-    //     window.scrollTo({ top: 0, behavior: 'smooth' });
-    // };
-    // window.addEventListener('scroll', handleScroll);
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
     return (
-        <React.StrictMode>
         <div className={ theme ? styles.light : styles.dark}>
 
             <button onClick={pageDecrement}>-</button>
@@ -144,15 +139,18 @@ const HomePage = () => {
                 </select>
             </div>
 
-
-            <div>{diets[2]?.name}</div>
-
             <label htmlFor="diet-filter">Filter by diet:</label>
             <select id="diet-filter" value={selectedDiet} onChange={handleDietChange}>
                 <option value="">All</option>
-                <option value="vegan">Vegan</option>
-                <option value="vegetarian">Vegetarian</option>
-                <option value="glutenFree">Gluten Free</option>
+                <option value="vegan">vegan</option>
+                <option value="vegetarian">vegetarian</option>
+                <option value="glutenFree">gluten free</option>
+                {
+                    diets?.map((diet, index) => {
+                    if (diet.name !== 'vegan' && diet.name !== 'vegetarian' && diet.name !== 'gluten free') {
+                        return <option key={index} value={diet.name}>{diet.name}</option>
+                    }})
+                }
             </select>
 
             <label htmlFor="origin-filter">Filter by origin:</label>
@@ -162,7 +160,6 @@ const HomePage = () => {
                 <option value="db">DB</option>
             </select>
 
-
             <span className={styles.cards} >
                 {
                     paginatedResult?.map((result) => {
@@ -170,7 +167,7 @@ const HomePage = () => {
                             key={result.id}
                             id={result.id}
                             healthScore={result.healthScore}
-                            name={result.name || result.title}
+                            name={result.name}
                             image={result.image}
                             diets={result.diets}
                             />
@@ -178,10 +175,7 @@ const HomePage = () => {
                 }
             </span>
 
-            {/* {showButton && (<button onClick={handleButtonClick}>Go to top</button>)} */}
-
         </div>
-        </React.StrictMode>
     );
 };
 

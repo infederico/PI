@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { 
   TOGGLE_THEME,
-  SEARCH_SUCCESS, SEARCH_FAIL, CLEAN_SEARCH_ERROR, GET_RECIPES, GET_DIETS,
-  FILTER_BY_ORIGIN_ALL, FILTER_BY_ORIGIN_API, FILTER_BY_ORIGIN_DB,
-  FILTER_BY_DIET_ALL, FILTER_BY_DIET_VEGAN, FILTER_BY_DIET_VEGETARIAN, FILTER_BY_DIET_GLUTENFREE,
+  SEARCH_SUCCESS, SEARCH_FAIL, CLEAN_SEARCH_ERROR, GET_RECIPES, GET_DIETS, 
+  SET_SELECTED_DIET, FILTER_BY_DIET_ALL, FILTER_BY_DIET_VEGAN, FILTER_BY_DIET_VEGETARIAN, FILTER_BY_DIET_GLUTENFREE, FILTER_BY_DIET_CUSTOM,
+  SET_DOUBLE_FILTERED_RESULT,
+  SET_SELECTED_ORIGIN, FILTER_BY_ORIGIN_ALL, FILTER_BY_ORIGIN_API, FILTER_BY_ORIGIN_DB,
+  SET_SELECTED_SORT_OPTION, SET_CURRENT_PAGE,
   GET_RECIPE_DETAIL, CLEAN_RECIPE_DETAIL,
   ADD_RECIPE, ADD_BACKEND_ERRORS, CLEAN_RECIPE_JUST_CREATED, CLEAN_BACKEND_ERRORS } from "./actions-types";
 
@@ -104,18 +106,8 @@ export const getDiets = () => async (dispatch) => {
 };
 
 
-export const filterByOriginAll = () => {
-  return { type: FILTER_BY_ORIGIN_ALL };
-};
-
-
-export const filterByOriginApi = () => {
-  return { type: FILTER_BY_ORIGIN_API };
-};
-
-
-export const filterByOriginDb = () => {
-  return { type: FILTER_BY_ORIGIN_DB };
+export const setSelectedDiet = (diet) => {
+  return { type: SET_SELECTED_DIET, payload: diet };
 };
 
 
@@ -139,4 +131,41 @@ export const filterByDietGlutenfree = () => {
 };
 
 
+export const filterByDietCustom = (diet) => {
+  return { type: FILTER_BY_DIET_CUSTOM, payload: diet };
+};
 
+
+export const setSelectedOrigin = (origin) => {
+  return { type: SET_SELECTED_ORIGIN, payload: origin };
+};
+
+
+export const filterByOriginAll = () => {
+  return { type: FILTER_BY_ORIGIN_ALL };
+};
+
+
+export const filterByOriginApi = () => {
+  return { type: FILTER_BY_ORIGIN_API };
+};
+
+
+export const filterByOriginDb = () => {
+  return { type: FILTER_BY_ORIGIN_DB };
+};
+
+
+export const setDoubleFilteredResult = (combinedFiltersResult) => {
+  return { type: SET_DOUBLE_FILTERED_RESULT, payload: combinedFiltersResult };
+};
+
+
+export const setSelectedSortOption = (sortOption) => {
+  return { type: SET_SELECTED_SORT_OPTION, payload: sortOption }
+};
+
+
+export const setCurrentPage = (currentPage) => {
+  return { type: SET_CURRENT_PAGE, payload: currentPage }
+};

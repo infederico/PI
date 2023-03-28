@@ -5,7 +5,7 @@ const postRecipe = async (inputRecipe) => {
     try {
         const { name, image, summary, healthScore, instructions, diets} = inputRecipe;
         
-        if(!name || !image || !summary || !healthScore || !instructions || diets.length === 0) throw new Error('Faltan datos obligatorios');
+        if(!name || !image || !summary || !healthScore || !instructions || diets.length === 0) throw new Error('Required fields missing');
 
         const dataRecipeForCreate = { name, image, summary, healthScore, instructions };
 
@@ -32,7 +32,7 @@ const postRecipe = async (inputRecipe) => {
             ...dataRecipeForCreate,
             diets: diets
         }
-        console.info('Se ha agregado tu receta correctamente')
+        console.info('Recipe created successfully')
         return dataRecipe;
 
     } catch (error) {

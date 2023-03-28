@@ -18,7 +18,7 @@ const saveApiData = async () => {
     try {
         const allDiets = /*await*/ getApiDiets();
        
-        for (let i = 0; i < allDiets.length; i++) { // son 12 tipos de dietas de la API + las que agregue el usuario
+        for (let i = 0; i < allDiets.length; i++) { // son 15 tipos de dietas de la API + las que agregue el usuario
             await Diet.findOrCreate({ where: { name: allDiets[i].name } });
         }
         return;

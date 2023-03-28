@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
 import { addRecipe, cleanRecipeJustCreated, cleanBackendErrors } from '../../redux/actions';
 
 import styles from './FormPage.module.css';
@@ -37,13 +38,24 @@ const FormPage = () => {
         dispatch(cleanBackendErrors());
 
         const { name, type, checked, value } = event.target;
+        
         if (name === 'otherDetail') {
             setNewDiet(value);
+            //UX enhance
+            if (submitted) setErrors(validation({
+                ...newRecipe,
+                diets: [...newRecipe.diets, value]
+            }));
         } else if (type === "checkbox") {
             setNewRecipe({
                 ...newRecipe,
                 diets: checked ? [...newRecipe.diets, value] : newRecipe.diets.filter(diet => diet !== value)
             })
+            //UX enhance
+            if (submitted) setErrors(validation({
+                ...newRecipe,
+                diets: checked ? [...newRecipe.diets, value] : newRecipe.diets.filter(diet => diet !== value)
+            }));
         } else {
             setNewRecipe({
                 ...newRecipe,
@@ -167,16 +179,19 @@ const FormPage = () => {
             <br />
             <input type='checkbox' name='vegetarian' onChange={handleChange} value='vegetarian' checked={newRecipe.diets.includes('vegetarian')} />Vegetarian 
             <input type='checkbox' name='vegan' onChange={handleChange} value='vegan' checked={newRecipe.diets.includes('vegan')} />Vegan 
-            <input type='checkbox' name='glutenFree' onChange={handleChange} value='glutenFree' checked={newRecipe.diets.includes('glutenFree')} />Gluten Free
-            <input type='checkbox' name='paleo' onChange={handleChange} value='paleo' checked={newRecipe.diets.includes('paleo')} />Paleo 
-            <input type='checkbox' name='ketogenic' onChange={handleChange} value='ketogenic' checked={newRecipe.diets.includes('ketogenic')} />Keto 
+            <input type='checkbox' name='gluten free' onChange={handleChange} value='gluten free' checked={newRecipe.diets.includes('gluten free')} />Gluten Free
+            <input type='checkbox' name='paleolithic' onChange={handleChange} value='paleolithic' checked={newRecipe.diets.includes('paleolithic')} />Paleolithic
+            <input type='checkbox' name='ketogenic' onChange={handleChange} value='ketogenic' checked={newRecipe.diets.includes('ketogenic')} />Ketogenic 
             <input type='checkbox' name='omnivore' onChange={handleChange} value='omnivore' checked={newRecipe.diets.includes('omnivore')} />Omnivore
             <input type='checkbox' name='lacto-vegetarian' onChange={handleChange} value='lacto-vegetarian' checked={newRecipe.diets.includes('lacto-vegetarian')} />Lacto-Vegetarian
             <input type='checkbox' name='ovo-vegetarian' onChange={handleChange} value='ovo-vegetarian' checked={newRecipe.diets.includes('ovo-vegetarian')} />Ovo-Vegetarian
-            <input type='checkbox' name='pescetarian' onChange={handleChange} value='pescetarian' checked={newRecipe.diets.includes('pescetarian')} />Pescetarian
-            <input type='checkbox' name='lowFodmap' onChange={handleChange} value='lowFodmap' checked={newRecipe.diets.includes('lowFodmap')} />Low FODMAP
-            <input type='checkbox' name='whole30' onChange={handleChange} value='whole30' checked={newRecipe.diets.includes('whole30')} />Whole30
+            <input type='checkbox' name='pescatarian' onChange={handleChange} value='pescatarian' checked={newRecipe.diets.includes('pescatarian')} />Pescatarian
+            <input type='checkbox' name='fodmap friendly' onChange={handleChange} value='fodmap friendly' checked={newRecipe.diets.includes('fodmap friendly')} />FODMAP Friendly
+            <input type='checkbox' name='whole 30' onChange={handleChange} value='whole 30' checked={newRecipe.diets.includes('whole 30')} />Whole 30
             <input type='checkbox' name='primal' onChange={handleChange} value='primal' checked={newRecipe.diets.includes('primal')} />Primal
+            <input type='checkbox' name='fruitarian' onChange={handleChange} value='fruitarian' checked={newRecipe.diets.includes('fruitarian')} />Fruitarian
+            <input type='checkbox' name='dairy free' onChange={handleChange} value='dairy free' checked={newRecipe.diets.includes('dairy free')} />Dairy Free
+            <input type='checkbox' name='lacto ovo vegetarian' onChange={handleChange} value='lacto ovo vegetarian' checked={newRecipe.diets.includes('lacto ovo vegetarian')} />Lacto-Ovo Vegetarian
             <br />
             <label>other: </label>
             <input type='text' name='otherDetail' onChange={handleChange} value={newDiet} />

@@ -14,7 +14,7 @@ const getRecipeDetail = async (idRecipe) => {
         return recipeDetail;
       }
     } catch (apiError) {
-      console.error('Receta no encontrada en la API');
+      console.error('Recipe not found in API');
     }
   
     try {
@@ -39,10 +39,10 @@ const getRecipeDetail = async (idRecipe) => {
         return recipeDetail;
       }
     } catch (dbError) {
-        console.error('Receta no encontrada en la DB');
+        console.error('Recipe not found in DB');
     }
   
-    return {error: 'Receta no encontrada'}
+    return {error: 'Recipe not found'}
   };
 
   module.exports = getRecipeDetail;
