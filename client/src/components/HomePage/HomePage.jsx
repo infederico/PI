@@ -34,22 +34,75 @@ const HomePage = () => {
     }, []);
 
     useEffect( () => {
-        if (filteredOneResult.length === 0 && filteredTwoResult.length === 0) {
-            dispatch(setDoubleFilteredResult(searchResult));
+        if (selectedDiet === '' && selectedOrigin === '') dispatch(setDoubleFilteredResult(searchResult));
+        if (selectedDiet !== '' && selectedOrigin === '') {
+            switch (selectedDiet) {
+                case 'all': dispatch(filterByDietAll());
+                break;
+                case 'vegan': dispatch(filterByDietVegan());
+                break;
+                case 'vegetarian': dispatch(filterByDietVegetarian());
+                break;
+                case 'glutenFree': dispatch(filterByDietGlutenfree());
+                break;
+                default: dispatch(filterByDietCustom(selectedDiet));
+            }
+        }
+        if (selectedDiet === '' && selectedOrigin !== '') {
+            switch (selectedOrigin) {
+                case 'all': dispatch(filterByOriginAll());
+                break;
+                case 'api': dispatch(filterByOriginApi());
+                break;
+                case 'db': dispatch(filterByOriginDb());
+                break;
+                default: return;
+            }
+        }
+        if (selectedDiet !== '' && selectedOrigin !== '') {
+            switch (selectedDiet) {
+                case 'all': dispatch(filterByDietAll());
+                break;
+                case 'vegan': dispatch(filterByDietVegan());
+                break;
+                case 'vegetarian': dispatch(filterByDietVegetarian());
+                break;
+                case 'glutenFree': dispatch(filterByDietGlutenfree());
+                break;
+                default: dispatch(filterByDietCustom(selectedDiet));
+            }
+            switch (selectedOrigin) {
+                case 'all': dispatch(filterByOriginAll());
+                break;
+                case 'api': dispatch(filterByOriginApi());
+                break;
+                case 'db': dispatch(filterByOriginDb());
+                break;
+                default: return;
+            }       
         }
     // eslint-disable-next-line
-    }, [searchResult]); 
-    
+    }, [searchResult]);
+
     useEffect( () => {
-        const combinedFiltersResult = filteredOneResult.filter(objA => {
-            const objB = filteredTwoResult.find(objB => objB.id === objA.id);
-            return objB !== undefined;
-        });
+        if (selectedDiet && !selectedOrigin) {
+            dispatch(setDoubleFilteredResult(filteredOneResult));
+        }
+
+        if (!selectedDiet && selectedOrigin) {
+            dispatch(setDoubleFilteredResult(filteredTwoResult));
+        }
+
+        if (selectedDiet && selectedOrigin) {
+            const combinedFiltersResult = filteredOneResult.filter(objA => {
+                const objB = filteredTwoResult.find(objB => objB.id === objA.id);
+                return objB !== undefined;
+            });
         dispatch(setDoubleFilteredResult(combinedFiltersResult))
+        }
     // eslint-disable-next-line
     }, [filteredOneResult, filteredTwoResult]); 
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     const sortFunctions = {
         'Health Score - des.': (a, b) => a.healthScore - b.healthScore,
         'Health Score - asc.': (a, b) => b.healthScore - a.healthScore,
@@ -58,44 +111,44 @@ const HomePage = () => {
     };
 
     const [ sortedResult, setSortedResult ] = useState([]);
-    const [ paginatedResult, setPaginatedResult ] = useState([]);
 
-    let aux = selectedSortOption ? doubleFilteredResult?.slice().sort(sortFunctions[selectedSortOption]) : doubleFilteredResult
+    let auxSortedResult = selectedSortOption ? doubleFilteredResult.slice().sort(sortFunctions[selectedSortOption]) : doubleFilteredResult;
     useEffect(() => {
-        setSortedResult(aux);
+        setSortedResult(auxSortedResult);
+        
     // eslint-disable-next-line
     }, [doubleFilteredResult, selectedSortOption]);
-
-    let auxBis = sortedResult?.slice(((currentPage * 9) - 9), (currentPage * 9))
+    
+    const [ paginatedResult, setPaginatedResult ] = useState([]);
+    
+    let auxPaginatedResult = sortedResult.slice(((currentPage * 9) - 9), (currentPage * 9))
     useEffect(() => {
-        setPaginatedResult(auxBis);
+        setPaginatedResult(auxPaginatedResult);
     // eslint-disable-next-line
     }, [sortedResult, currentPage]);
 
     const pageIncrement = () => {
         if (currentPage < 12) {
-            currentPage = currentPage + 1;
-            dispatch(setCurrentPage(currentPage));
+            let nextPage = currentPage + 1;
+            dispatch(setCurrentPage(nextPage));
         }
     };
 
     const pageDecrement = () => {
         if (1 < currentPage) {
-            currentPage = currentPage -1;
-            dispatch(setCurrentPage(currentPage));
+            let prevPage = currentPage -1;
+            dispatch(setCurrentPage(prevPage));
         }
     };
 
     const handleSortOptionChange = (event) => {
         dispatch(setSelectedSortOption(event.target.value));
-        
     };
 
     const handleDietChange = (event) => {
         dispatch(setSelectedDiet(event.target.value));
-
         switch (event.target.value) {
-            case '': dispatch(filterByDietAll());
+            case 'all': dispatch(filterByDietAll());
             break;
             case 'vegan': dispatch(filterByDietVegan());
             break;
@@ -109,9 +162,8 @@ const HomePage = () => {
 
     const handleOriginChange = (event) => {
         dispatch(setSelectedOrigin(event.target.value));
-    
         switch (event.target.value) {
-            case '': dispatch(filterByOriginAll());
+            case 'all': dispatch(filterByOriginAll());
             break;
             case 'api': dispatch(filterByOriginApi());
             break;
@@ -125,12 +177,12 @@ const HomePage = () => {
         <div className={ theme ? styles.light : styles.dark}>
 
             <button onClick={pageDecrement}>-</button>
-            <span>{`     ${currentPage}     `}</span>
+            <span>{`${currentPage}`}</span>
             <button onClick={pageIncrement}>+</button>
 
             {searchError && <span className={styles.error}>{searchError}</span>}
             {!searchError && searchResult.length !== 0 && <span className={styles.error}>{`${searchResult.length} recipes found`}</span>}
-
+            {/* {(paginatedResult.length === 0) && <span className={styles.error}>there are no matches for your search</span>} */}
             <div>
                 <label htmlFor="sort">Sort by:</label>
                 <select id="sort" value={selectedSortOption} onChange={handleSortOptionChange}>
@@ -144,7 +196,7 @@ const HomePage = () => {
 
             <label htmlFor="diet-filter">Filter by diet:</label>
             <select id="diet-filter" value={selectedDiet} onChange={handleDietChange}>
-                <option value="">All</option>
+                <option value="all">All</option>
                 <option value="vegan">vegan</option>
                 <option value="vegetarian">vegetarian</option>
                 <option value="glutenFree">gluten free</option>
@@ -159,7 +211,7 @@ const HomePage = () => {
 
             <label htmlFor="origin-filter">Filter by origin:</label>
             <select id="origin-filter" value={selectedOrigin} onChange={handleOriginChange}>
-                <option value="">All</option>
+                <option value="all">All</option>
                 <option value="api">API</option>
                 <option value="db">DB</option>
             </select>
