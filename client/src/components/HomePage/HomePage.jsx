@@ -7,7 +7,7 @@ import { setSelectedOrigin, filterByOriginAll, filterByOriginApi, filterByOrigin
 
 import styles from './HomePage.module.css';
 
-import RecipeCard from "../RecipeCard/RecipeCard";
+import RecipeCard from '../RecipeCard/RecipeCard';
 
 const HomePage = () => {
 
@@ -33,53 +33,40 @@ const HomePage = () => {
     // eslint-disable-next-line
     }, []);
 
+    const filterByDietDispatcher = (selectedDiet) => {
+        switch (selectedDiet) {
+            case 'all': dispatch(filterByDietAll());
+            break;
+            case 'vegan': dispatch(filterByDietVegan());
+            break;
+            case 'vegetarian': dispatch(filterByDietVegetarian());
+            break;
+            case 'glutenFree': dispatch(filterByDietGlutenfree());
+            break;
+            default: dispatch(filterByDietCustom(selectedDiet));
+            break;
+        }
+    };
+
+    const filterByOriginDispatcher = (selectedOrigin) => {
+        switch (selectedOrigin) {
+            case 'all': dispatch(filterByOriginAll());
+            break;
+            case 'api': dispatch(filterByOriginApi());
+            break;
+            case 'db': dispatch(filterByOriginDb());
+            break;
+            default: break;
+        }
+    }
+
     useEffect( () => {
         if (selectedDiet === '' && selectedOrigin === '') dispatch(setDoubleFilteredResult(searchResult));
-        if (selectedDiet !== '' && selectedOrigin === '') {
-            switch (selectedDiet) {
-                case 'all': dispatch(filterByDietAll());
-                break;
-                case 'vegan': dispatch(filterByDietVegan());
-                break;
-                case 'vegetarian': dispatch(filterByDietVegetarian());
-                break;
-                case 'glutenFree': dispatch(filterByDietGlutenfree());
-                break;
-                default: dispatch(filterByDietCustom(selectedDiet));
-            }
-        }
-        if (selectedDiet === '' && selectedOrigin !== '') {
-            switch (selectedOrigin) {
-                case 'all': dispatch(filterByOriginAll());
-                break;
-                case 'api': dispatch(filterByOriginApi());
-                break;
-                case 'db': dispatch(filterByOriginDb());
-                break;
-                default: return;
-            }
-        }
+        if (selectedDiet !== '' && selectedOrigin === '') filterByDietDispatcher(selectedDiet);
+        if (selectedDiet === '' && selectedOrigin !== '') filterByOriginDispatcher(selectedOrigin);
         if (selectedDiet !== '' && selectedOrigin !== '') {
-            switch (selectedDiet) {
-                case 'all': dispatch(filterByDietAll());
-                break;
-                case 'vegan': dispatch(filterByDietVegan());
-                break;
-                case 'vegetarian': dispatch(filterByDietVegetarian());
-                break;
-                case 'glutenFree': dispatch(filterByDietGlutenfree());
-                break;
-                default: dispatch(filterByDietCustom(selectedDiet));
-            }
-            switch (selectedOrigin) {
-                case 'all': dispatch(filterByOriginAll());
-                break;
-                case 'api': dispatch(filterByOriginApi());
-                break;
-                case 'db': dispatch(filterByOriginDb());
-                break;
-                default: return;
-            }       
+            filterByDietDispatcher(selectedDiet);
+            filterByOriginDispatcher(selectedOrigin);
         }
     // eslint-disable-next-line
     }, [searchResult]);
@@ -115,11 +102,14 @@ const HomePage = () => {
     let auxSortedResult = selectedSortOption ? doubleFilteredResult.slice().sort(sortFunctions[selectedSortOption]) : doubleFilteredResult;
     useEffect(() => {
         setSortedResult(auxSortedResult);
-        
+        let totalRecipesToPaginate = doubleFilteredResult.length;
+        let totalPages = Math.ceil(totalRecipesToPaginate / 9);
+        setLastCurrentPage(totalPages);
     // eslint-disable-next-line
     }, [doubleFilteredResult, selectedSortOption]);
     
     const [ paginatedResult, setPaginatedResult ] = useState([]);
+    const [ lastCurrentPage, setLastCurrentPage ] = useState(1);
     
     let auxPaginatedResult = sortedResult.slice(((currentPage * 9) - 9), (currentPage * 9))
     useEffect(() => {
@@ -128,7 +118,7 @@ const HomePage = () => {
     }, [sortedResult, currentPage]);
 
     const pageIncrement = () => {
-        if (currentPage < 12) {
+        if (currentPage < lastCurrentPage) {
             let nextPage = currentPage + 1;
             dispatch(setCurrentPage(nextPage));
         }
@@ -158,6 +148,7 @@ const HomePage = () => {
             break;
             default: dispatch(filterByDietCustom(event.target.value));
         }
+        dispatch(setCurrentPage(1));
     };
 
     const handleOriginChange = (event) => {
@@ -171,6 +162,7 @@ const HomePage = () => {
             break;
             default: return;
         }
+        dispatch(setCurrentPage(1));
     };
 
     return (
@@ -182,7 +174,7 @@ const HomePage = () => {
 
             {searchError && <span className={styles.error}>{searchError}</span>}
             {!searchError && searchResult.length !== 0 && <span className={styles.error}>{`${searchResult.length} recipes found`}</span>}
-            {/* {(paginatedResult.length === 0) && <span className={styles.error}>there are no matches for your search</span>} */}
+          
             <div>
                 <label htmlFor="sort">Sort by:</label>
                 <select id="sort" value={selectedSortOption} onChange={handleSortOptionChange}>
