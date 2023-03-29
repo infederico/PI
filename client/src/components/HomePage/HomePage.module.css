@@ -17,6 +17,7 @@
 }
 
 .error {
+    font-family: 'Lora', serif;;
     font-size: small;
   color: var(--secondary-color-700);
 }

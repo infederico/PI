@@ -27,26 +27,26 @@ const HomePage = () => {
     const selectedSortOption = useSelector(state => state.selectedSortOption);
     let currentPage = useSelector(state => state.currentPage);
 
-    useEffect(() => {
+    useEffect( () => {
         if (searchResult.length === 0) dispatch(getRecipes());
-    }, []);
-
-    useEffect(() => {
         if (diets.length === 0) dispatch(getDiets());
-      }, []);
+    // eslint-disable-next-line
+    }, []);
 
     useEffect( () => {
         if (filteredOneResult.length === 0 && filteredTwoResult.length === 0) {
             dispatch(setDoubleFilteredResult(searchResult));
         }
+    // eslint-disable-next-line
     }, [searchResult]); 
     
     useEffect( () => {
-        const combinedFiltersResult = filteredOneResult?.filter(objA => {
-            const objB = filteredTwoResult?.find(objB => objB.id === objA.id);
+        const combinedFiltersResult = filteredOneResult.filter(objA => {
+            const objB = filteredTwoResult.find(objB => objB.id === objA.id);
             return objB !== undefined;
         });
         dispatch(setDoubleFilteredResult(combinedFiltersResult))
+    // eslint-disable-next-line
     }, [filteredOneResult, filteredTwoResult]); 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -63,11 +63,13 @@ const HomePage = () => {
     let aux = selectedSortOption ? doubleFilteredResult?.slice().sort(sortFunctions[selectedSortOption]) : doubleFilteredResult
     useEffect(() => {
         setSortedResult(aux);
-      }, [doubleFilteredResult, selectedSortOption]);
+    // eslint-disable-next-line
+    }, [doubleFilteredResult, selectedSortOption]);
 
     let auxBis = sortedResult?.slice(((currentPage * 9) - 9), (currentPage * 9))
     useEffect(() => {
         setPaginatedResult(auxBis);
+    // eslint-disable-next-line
     }, [sortedResult, currentPage]);
 
     const pageIncrement = () => {
@@ -86,6 +88,7 @@ const HomePage = () => {
 
     const handleSortOptionChange = (event) => {
         dispatch(setSelectedSortOption(event.target.value));
+        
     };
 
     const handleDietChange = (event) => {
@@ -146,6 +149,7 @@ const HomePage = () => {
                 <option value="vegetarian">vegetarian</option>
                 <option value="glutenFree">gluten free</option>
                 {
+                // eslint-disable-next-line
                     diets?.map((diet, index) => {
                     if (diet.name !== 'vegan' && diet.name !== 'vegetarian' && diet.name !== 'gluten free') {
                         return <option key={index} value={diet.name}>{diet.name}</option>

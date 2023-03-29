@@ -34,7 +34,7 @@ const DetailPage = () => {
   
     return (
         <div className={ theme ? styles.containerLight : styles.containerDark }>
-          <div className={styles.header}>
+          <div className={ theme ? styles.headerLight : styles.headerDark }>
             <h2>{name}</h2>
           </div>
           <div className={styles.body}>
@@ -56,7 +56,7 @@ const DetailPage = () => {
               </div>
               <div className={styles.infoItem}>
                 <label>Diets: </label>
-                <div className={styles.dietsContainer}>
+                <div className={theme ? styles.dietsContainerLight : styles.dietsContainerDark}>
                   {diets?.map((diet, index) => {
                     return <span key={index}>{diet}</span>;
                   })}

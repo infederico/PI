@@ -1,51 +1,49 @@
-.darkNav {
-  background-color: var(--dark-back-color);
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  transition-duration: 0.75s;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
-}
-
 .lightNav {
   background-color: var(--light-back-color);
-  height: 64px;
+  height: 48px;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
   transition-duration: 0.75s;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
 }
 
+.darkNav {
+  background-color: var(--dark-back-color);
+  height: 48px;
+  display: flex;
+  align-items: center;
+  transition-duration: 0.75s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
+}
+
+.homeContainer {
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;  
+}
+
 .logo {
-    position: fixed;
-    left: 1em;
-    height: 48px;
-    cursor: pointer;
-    scale: 0.60;
+  scale: 0.65;
 }
   
 .logo:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .lightTextLogo {
-  font-size: 40px;
+  font-size: 32px;
   font-family: 'EB Garamond', serif;
   font-style: italic;
   font-weight: 700;
-  line-height: 0.05;
   color: var(--light-text-color); 
   transition-duration: 0.5s;
 }
 
 .darkTextLogo {
-  font-size: 40px;
+  font-size: 32px;
   font-family: 'EB Garamond', serif;
   font-style: italic;
   font-weight: 700;
-  line-height: 0.05;
   color: var(--dark-text-color); 
   transition-duration: 0.5s;
 }
@@ -69,14 +67,15 @@
 }
 
 .lightNavLinks a {
-  margin: 0 16px;
+  margin: 0 24px;
   color: var(--light-text-color);
   text-decoration: none;
   transition-duration: 0.5s;
   font-size: 20px;
 }
+
 .darkNavLinks a {
-  margin: 0 16px;
+  margin: 0 24px;
   color: var(--dark-text-color);
   text-decoration: none;
   transition-duration: 0.5s;
@@ -94,4 +93,3 @@
 .darkNavLinks a:focus {
   color: var(--secondary-color);
 }
-
