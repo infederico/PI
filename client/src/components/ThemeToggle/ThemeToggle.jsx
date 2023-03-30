@@ -1,8 +1,10 @@
+import { useSelector, useDispatch } from 'react-redux';
+
+import { toggleTheme } from '../../redux/actions';
+
 import styles from './ThemeToggle.module.css';
 import lightTheme from '../../assets/images/light-mode.png';
 import darkTheme from '../../assets/images/dark-mode.png';
-import { useSelector, useDispatch } from 'react-redux';
-import { toggleTheme } from '../../redux/actions';
 
 const ToggleTheme = () => { 
 

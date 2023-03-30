@@ -4,8 +4,8 @@ body {
 }
 
 .main {
-    margin-top: 64px;
-    background-image: url('../../assets/images/not-found.jpg');
+    margin-top: 48px;
+    background-image: url('../../assets/images/not-found-low.jpg');
     position: absolute;
     top: 0;
     height: 100%;
@@ -13,32 +13,30 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    opacity: 0.9;
+    opacity: 0.75;
     z-index: 1;
     text-align: center;
-
     font-family: 'EB Garamond', serif;
     font-size: 44px;
     line-height: 1.5;
-    color: beige; 
-    
+    color: var(--secondary-color); 
 }
 
 .title {
-    color: var(--primary-color-200);
-    top: 160px;
+    color: var(--secondary-color-900); 
+    top: 33%;
     position: relative;
     align-items: center;
     text-justify: center;
     font-family: 'EB Garamond', serif;
     font-style: italic;
     font-weight: 700;
-    z-index: 4;
+    z-index: 3;
 }
 
 .button {
     text-align: center;
-    width: 15%;
+    width: 11%;
     border-radius: 7.5px;
     border: whitesmoke solid 1px;
     box-sizing: border-box;
@@ -92,34 +90,4 @@ body {
 
 .button:hover::before {
     animation: rainbowSlide 1.25s linear infinite;
-}
-
-.lightThemeShade {
-    margin-top: 0px;
-    position: fixed;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    right: 0;    
-    z-index: 2;
-    opacity: 0.25;
-    background-color: var(--primary-color-100);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-}
-
-.darkThemeShade {
-    margin-top: 0px;
-    position: fixed;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    right: 0;    
-    z-index: 2;
-    opacity: 0.25;
-    background-color: var(--primary-color-900);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
 }

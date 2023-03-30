@@ -8,6 +8,7 @@ import {
   SET_SELECTED_SORT_OPTION, SET_CURRENT_PAGE,
   GET_RECIPE_DETAIL, CLEAN_RECIPE_DETAIL,
   ADD_RECIPE, ADD_BACKEND_ERRORS, CLEAN_RECIPE_JUST_CREATED, CLEAN_BACKEND_ERRORS } from "./actions-types";
+import { GET_RANDOM_RECIPE, CLEAN_RANDOM_RECIPE } from "./actions-types";
 
 
 export const toggleTheme = () => {
@@ -168,4 +169,22 @@ export const setSelectedSortOption = (sortOption) => {
 
 export const setCurrentPage = (currentPage) => {
   return { type: SET_CURRENT_PAGE, payload: currentPage }
+};
+
+
+export const getRandomRecipe = () => async (dispatch) => {
+  try {
+    let response = await axios.get('http://localhost:3001/explore/random');
+    dispatch({
+      type: GET_RANDOM_RECIPE,
+      payload: response.data
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+
+export const cleanRandomRecipe = () => {
+  return { type: CLEAN_RANDOM_RECIPE }
 };

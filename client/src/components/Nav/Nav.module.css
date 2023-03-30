@@ -22,16 +22,18 @@
   align-items: center;  
 }
 
-.logo {
-  scale: 0.65;
-}
-  
-.logo:hover {
+.homeContainer:hover {
   cursor: pointer;
+}
+
+.logo {
+  scale: 0.575;
 }
 
 .lightTextLogo {
   font-size: 32px;
+  padding-left: 8px;
+  padding-right: 48px;
   font-family: 'EB Garamond', serif;
   font-style: italic;
   font-weight: 700;
@@ -41,6 +43,8 @@
 
 .darkTextLogo {
   font-size: 32px;
+  padding-left: 8px;
+  padding-right: 48px;
   font-family: 'EB Garamond', serif;
   font-style: italic;
   font-weight: 700;
@@ -49,7 +53,7 @@
 }
 
 .darkNavLinks {
-  margin: 0 16px;
+  padding-left: 320px;
   color: var(--dark-text-color);
   text-decoration: none;
   font-family: 'EB Garamond', serif;
@@ -58,8 +62,8 @@
 }
 
 .lightNavLinks {
-  margin: 0 16px;
-  color: var(--light-text-color);
+  padding-left: 320px;
+  color: var(--dark-text-color);
   text-decoration: none;
   font-family: 'EB Garamond', serif;
   font-weight: 700;

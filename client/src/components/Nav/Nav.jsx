@@ -21,25 +21,23 @@ const Nav = () => {
 
   return (
     <div className={ theme ? styles.lightNav : styles.darkNav }>
-      <div className={styles.homeContainer}>
-        <div className={ theme ? styles.lightTextLogo : styles.darkTextLogo }>foody</div>
+      <div className={styles.homeContainer} onClick={handleClick} title='home'>
         <img
           src={ theme ? lightLogo : darkLogo } alt='logo-home'
           className={styles.logo}
-          onClick={handleClick}
-          title='home'
         />
+        <div className={ theme ? styles.lightTextLogo : styles.darkTextLogo }>foody</div>
       </div>
       {isHomePage && <SearchBar />}
     
       <div className={styles.navLinkContainer}>
         <div className={ theme ? styles.lightNavLinks : styles.darkNavLinks }>
           <NavLink to='/create'>Create</NavLink>
-          <NavLink to='/recipes'>Explore</NavLink>
+          <NavLink to='/explore'>Explore</NavLink>
           <NavLink to='/login'>Log in</NavLink>
         </div>
       </div>
-
+      
       <ToggleTheme />
     </div>
   );

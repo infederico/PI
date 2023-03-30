@@ -40,7 +40,7 @@ const getRecipeByName = async (name) => {
                 })
             };
             ///////////////////////////////////////////////////////mockeo de api respnse para cuando se acaba el credito diario
-            const apiResponse = require('../mock/api_res.json');//await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${name}&addRecipeInformation=true&number=100&apiKey=${API_KEY}`);
+            const apiResponse = require('../mock/api_res.json'); //await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${name}&addRecipeInformation=true&number=100&apiKey=${API_KEY}`);
             let apiResults = [];
             if (apiResponse) {
                 apiResponse.data.results?.map((recipe) => {
@@ -67,7 +67,7 @@ const getRecipeByName = async (name) => {
             return results;
         } else {
             ///////////////////////////////////////////////////////mockeo de api respnse para cuando se acaba el credito diario
-            const apiResponse = require('../mock/api_res.json'); // await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=&addRecipeInformation=true&number=100&apiKey=${API_KEY}`);
+            const apiResponse = require('../mock/api_res.json'); //await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=&addRecipeInformation=true&number=100&apiKey=${API_KEY}`);
             let apiResults = [];
             if (apiResponse) {
                 apiResponse.data.results?.map((recipe) => {

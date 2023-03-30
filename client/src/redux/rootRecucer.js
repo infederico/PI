@@ -6,6 +6,7 @@ import {
     SET_SELECTED_SORT_OPTION, SET_CURRENT_PAGE,
     GET_RECIPE_DETAIL,
     ADD_RECIPE, ADD_BACKEND_ERRORS, CLEAN_RECIPE_DETAIL, CLEAN_RECIPE_JUST_CREATED, CLEAN_BACKEND_ERRORS } from "./actions-types";
+import { GET_RANDOM_RECIPE, CLEAN_RANDOM_RECIPE } from "./actions-types";
 
 const initialState = {
     //general
@@ -32,6 +33,8 @@ const initialState = {
     //FormPage
     recipeJustCreated: {},
     backendErrors: '',
+    //ExplorePage
+    randomRecipe: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -164,6 +167,18 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 backendErrors: ''
             }
+
+        case GET_RANDOM_RECIPE:
+            return {
+                ...state,
+                randomRecipe: action.payload
+            }
+        case CLEAN_RANDOM_RECIPE:
+            return {
+                ...state,
+                randomRecipe: {}
+            }
+
         default: 
             return {
                 ...state

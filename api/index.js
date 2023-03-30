@@ -22,12 +22,12 @@ const PORT = 3001;
 const { conn } = require('./src/db.js');
 const saveApiData = require('./src/controllers/saveApiData');
 
-// Syncing database
+// Syncing database // force: false for data persistence - true when correcting and modifing models
 conn.sync({ force: false }).then( async () => {
 
-   console.log('DB connected');
+   console.log('DB connected'); 
    console.time('DB load time'); // Start the timer
-   await saveApiData(); // precargo en la DB todas las diets disponibles
+   await saveApiData(); // preload to DB all available diets
    console.timeEnd('DB load time'); // End the timer and log the elapsed time
    console.log('DB loaded');
    

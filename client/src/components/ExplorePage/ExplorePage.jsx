@@ -1,25 +1,21 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
 
-import { getRecipeDetail } from '../../redux/actions';
-import { cleanRecipeDetail } from '../../redux/actions';
+import { getRandomRecipe, cleanRandomRecipe } from '../../redux/actions';
 
-import styles from './DetailPage.module.css';
+import styles from './ExplorePage.module.css';
 
-const DetailPage = () => {
+const ExplorePage = () => {
     
     const dispatch = useDispatch();
-    const { idRecipe } = useParams();
-
     const theme = useSelector(state => state.theme);
-    const recipeDetail = useSelector(state => state.recipeDetail);
-    const { name, image, summary, healthScore, instructions, diets } = recipeDetail;
+    const randomRecipe = useSelector(state => state.randomRecipe);
+    //const { name, image, summary, healthScore, instructions, diets } = randomRecipe;
     
     useEffect( () => {
-        dispatch(getRecipeDetail(idRecipe));
+        dispatch(getRandomRecipe());
         return () => {
-            dispatch(cleanRecipeDetail());
+            dispatch(cleanRandomRecipe());
         }
     // eslint-disable-next-line
     }, []);
@@ -30,17 +26,22 @@ const DetailPage = () => {
         return strippedHtml;
     };
 
-    let strippedSummary = stripHtmlTags(summary);
-    let strippedInstructions = stripHtmlTags(instructions);
+    let strippedSummary = stripHtmlTags(randomRecipe?.summary);
+    let strippedInstructions = stripHtmlTags(randomRecipe?.instructions);
+
+    const handleClick = () => {
+      window.location.reload();
+    };
   
     return (
         <div className={ theme ? styles.containerLight : styles.containerDark }>
+          <button className={styles.button} onClick={handleClick}><span>Random Recipe</span></button>
           <div className={ theme ? styles.headerLight : styles.headerDark }>
-            <h2>{name}</h2>
+            <h2>{randomRecipe?.name}</h2>
           </div>
           <div className={styles.body}>
             <div className={styles.imageContainer}>
-              <img src={image} alt={name} />
+              <img src={randomRecipe?.image} alt={randomRecipe?.name} />
             </div>
             <div className={styles.infoContainer}>
               <div className={styles.infoItem}>
@@ -49,7 +50,7 @@ const DetailPage = () => {
               </div>
               <div className={styles.infoItem}>
                 <label>Health Score: </label>
-                <p>{healthScore}</p>
+                <p>{randomRecipe?.healthScore}</p>
               </div>
               <div className={styles.infoItem}>
                 <label>Instructions: </label>
@@ -58,7 +59,7 @@ const DetailPage = () => {
               <div className={styles.infoItem}>
                 <label>Diets: </label>
                 <div className={theme ? styles.dietsContainerLight : styles.dietsContainerDark}>
-                  {diets?.map((diet, index) => {
+                  {randomRecipe.diets?.map((diet, index) => {
                     return <span key={index}>{diet}</span>;
                   })}
                 </div>
@@ -70,32 +71,4 @@ const DetailPage = () => {
       
 };
 
-export default DetailPage;
-
-
-
-
-
-
-
-
-
-
-//  <div>
-//                 <label>name: </label>
-//                 <h4>{name}</h4>
-//                 <label>image: </label>
-//                 <img src={image} alt={name} />
-//                 <label>summary: </label>
-//                 <h4>{strippedSummary}</h4>
-//                 <label>healthScore: </label>
-//                 <h4>{healthScore}</h4>
-//                 <label>instructions: </label>
-//                 <h4>{instructions}</h4>
-//                 <label>diets: </label>
-//                 {
-//                     diets?.map( (diet, index) => {
-//                         return <h4 key={index}>{diet}</h4>
-//                     })
-//                 }
-//             </div>
+export default ExplorePage;
