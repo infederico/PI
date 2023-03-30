@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getRecipes, getDiets, setSelectedSortOption, setDoubleFilteredResult, setCurrentPage } from "../../redux/actions";
-import { setSelectedDiet, filterByDietAll, filterByDietVegan, filterByDietVegetarian, filterByDietGlutenfree, filterByDietCustom } from "../../redux/actions";
-import { setSelectedOrigin, filterByOriginAll, filterByOriginApi, filterByOriginDb } from "../../redux/actions";
+import { getRecipes, getDiets, setDoubleFilteredResult, setCurrentPage } from "../../redux/actions";
+import { filterByDietAll, filterByDietVegan, filterByDietVegetarian, filterByDietGlutenfree, filterByDietCustom } from "../../redux/actions";
+import { filterByOriginAll, filterByOriginApi, filterByOriginDb } from "../../redux/actions";
 
 import styles from './HomePage.module.css';
 
 import RecipeCard from '../RecipeCard/RecipeCard';
+import FilterByDiet from '../FilterByDiet/FilterByDiet';
+import FilterByOrigin from '../FilterByOrigin/FilterByOrigin';
+import SortBy from '../SortBy/SortBy';
 
 const HomePage = () => {
 
@@ -46,7 +49,9 @@ const HomePage = () => {
             filterByDietDispatcher(selectedDiet);
             filterByOriginDispatcher(selectedOrigin);
         }
-        dispatch(setCurrentPage(1));
+        //every time user perform a new search and the quantity of results exceed current page -> navigate to page 1 - if only component unmount/ mount again it keep the last page
+        let totalPages = Math.ceil(searchResult.length / 9); /////////////////////////////////
+        if (currentPage > totalPages) dispatch(setCurrentPage(1)); //////////////////////////
     // eslint-disable-next-line
     }, [searchResult]);
 
@@ -97,7 +102,7 @@ const HomePage = () => {
         }
     };
 
-    // functions with each sorting option logic - mapped to an object for cleaner code
+    //functions with each sorting option logic - mapped to an object for cleaner code
     const sortFunctions = {
         'Health Score - des.': (a, b) => a.healthScore - b.healthScore,
         'Health Score - asc.': (a, b) => b.healthScore - a.healthScore,
@@ -113,6 +118,7 @@ const HomePage = () => {
     // then this hook sort it content and store the sorted result array in a local state to be paginated - then it calculates the last page possible taking acount of the results quantity - store this max page in a local state to proper and dinamic pagination
     useEffect(() => {
         setSortedResult(auxSortedResult);
+
         let totalRecipesToPaginate = doubleFilteredResult.length;
         let totalPages = Math.ceil(totalRecipesToPaginate / 9);
         setLastCurrentPage(totalPages);
@@ -144,65 +150,23 @@ const HomePage = () => {
         }
     };
 
-    const handleSortOptionChange = (event) => {
-        dispatch(setSelectedSortOption(event.target.value));
-    };
-
-    const handleDietChange = (event) => {
-        dispatch(setSelectedDiet(event.target.value));
-        filterByDietDispatcher(event.target.value);
-        dispatch(setCurrentPage(1));
-    };
-
-    const handleOriginChange = (event) => {
-        dispatch(setSelectedOrigin(event.target.value));
-        filterByOriginDispatcher(event.target.value);
-        dispatch(setCurrentPage(1));
-    };
-
     return (
         <div className={ theme ? styles.light : styles.dark}>
 
-            <button onClick={pageDecrement}>-</button>
-            <span>{`${currentPage}`}</span>
-            <button onClick={pageIncrement}>+</button>
-
             {searchError && <span className={styles.error}>{searchError}</span>}
             {!searchError && searchResult.length !== 0 && <span className={styles.error}>{`${searchResult.length} recipes found`}</span>}
-          
-            <div>
-                <label htmlFor="sort">Sort by:</label>
-                <select id="sort" value={selectedSortOption} onChange={handleSortOptionChange}>
-                    <option value="no sort"></option>
-                    <option value="Health Score - asc.">Health Score (max to min)</option>
-                    <option value="Health Score - des.">Health Score (min to max)</option>
-                    <option value="Name - asc.">Name - asc. (A to Z)</option>
-                    <option value="Name - des.">Name - asc. (Z to A)</option>
-                </select>
+            
+            <div className={styles.containerSortFilters} >
+                <div className={styles.pagination}>
+                    <button onClick={pageDecrement}>prev</button>
+                    <span>{`Page ${currentPage}`}</span>
+                    <button onClick={pageIncrement}>next</button>
+                </div>
+                <SortBy />
+                <FilterByDiet />
+                <FilterByOrigin />
             </div>
-
-            {/* <label htmlFor="diet-filter">Filter by diet:</label>
-            <select id="diet-filter" value={selectedDiet} onChange={handleDietChange}>
-                <option value="all">All</option>
-                <option value="vegan">vegan</option>
-                <option value="vegetarian">vegetarian</option>
-                <option value="glutenFree">gluten free</option>
-                {
-                // eslint-disable-next-line
-                    diets?.map((diet, index) => {
-                    if (diet.name !== 'vegan' && diet.name !== 'vegetarian' && diet.name !== 'gluten free') {
-                        return <option key={index} value={diet.name}>{diet.name}</option>
-                    }})
-                }
-            </select> */}
-
-            <label htmlFor="origin-filter">Filter by origin:</label>
-            <select id="origin-filter" value={selectedOrigin} onChange={handleOriginChange}>
-                <option value="all">All</option>
-                <option value="api">API</option>
-                <option value="db">DB</option>
-            </select>
-
+           
             <span className={styles.cards} >
                 {
                     paginatedResult?.map((result) => {
@@ -217,7 +181,6 @@ const HomePage = () => {
                     })
                 }
             </span>
-
         </div>
     );
 };

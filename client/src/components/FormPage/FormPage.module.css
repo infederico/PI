@@ -25,7 +25,7 @@
 .formu input[type="checkbox"] {
   margin-right: 5px;
 }
-
+/* 
 .formu button[type="submit"] {
   background-color: #008CBA;
   color: white;
@@ -35,9 +35,85 @@
   margin-top: 20px;
   cursor: pointer;
   font-size: 16px;
-}
+} */
 
 .errors {
   font-size: small;
   color: var(--secondary-color-700);
+}
+
+.success {
+  font-size: small;
+  color: var(--secondary-color-700);
+}
+
+.button {
+    z-index: 2;
+    text-align: center;
+    width: 11%;
+    border-radius: 7.5px;
+    border: var(--neutral-color-100) solid 1px;
+    box-sizing: border-box;
+    display: block;
+    overflow: hidden;
+    padding: 3px;
+    transform: translate(-50%, -50%);
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 400%;
+    height: 100%;
+    background: linear-gradient(115deg,#4fcf70,#fad648,#a767e5,#12bcfe,#44ce7b);
+    background-size: 50% 100%;
+}
+
+.button span {
+    z-index: 4;
+    position: relative;
+    padding: .25rem 0;
+    font-family: 'EB Garamond', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    align-items: center;
+    background: var(--primary-color-100);
+    color: var(--primary-color-800);
+    border-radius: 2.5px;
+    display: block;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.addButton {
+    padding: 4px 8px;
+    margin-left: 8px;
+    font-family: 'Lora', serif;
+    border: none;
+    background-color: var(--secondary-color-500);
+    color: var(--primary-color-100);
+    border-radius: 3px;
+}
+
+.addButton:hover {
+    cursor: pointer;
+    background-color: var(--secondary-color-700);
+    
+}
+
+@keyframes rainbowSlide {
+    to {
+        transform: translateX(-50%)
+    }
+}
+
+.button:hover::before {
+    animation: rainbowSlide 1.25s linear infinite;
 }

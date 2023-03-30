@@ -71,31 +71,3 @@ const DetailPage = () => {
 };
 
 export default DetailPage;
-
-
-
-
-
-
-
-
-
-
-//  <div>
-//                 <label>name: </label>
-//                 <h4>{name}</h4>
-//                 <label>image: </label>
-//                 <img src={image} alt={name} />
-//                 <label>summary: </label>
-//                 <h4>{strippedSummary}</h4>
-//                 <label>healthScore: </label>
-//                 <h4>{healthScore}</h4>
-//                 <label>instructions: </label>
-//                 <h4>{instructions}</h4>
-//                 <label>diets: </label>
-//                 {
-//                     diets?.map( (diet, index) => {
-//                         return <h4 key={index}>{diet}</h4>
-//                     })
-//                 }
-//             </div>

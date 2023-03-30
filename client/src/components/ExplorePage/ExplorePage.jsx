@@ -30,7 +30,8 @@ const ExplorePage = () => {
     let strippedInstructions = stripHtmlTags(randomRecipe?.instructions);
 
     const handleClick = () => {
-      window.location.reload();
+      dispatch(cleanRandomRecipe());
+      dispatch(getRandomRecipe());
     };
   
     return (

@@ -1,0 +1,30 @@
+.lightSort {  
+    font-family: 'Lora', serif;
+    color: var(--primary-color-900);
+    font-size: 16px;
+}
+
+.darkSort {
+    font-family: 'Lora', serif;
+    color: var(--primary-color-200);
+    font-size: 16px;
+}
+ 
+.select {
+    padding: 1px;
+    width: auto;
+    border: 1px solid var(--secondary-color-100);
+    border-radius: 5px;
+    background-color: var(--primary-color-100);
+    font-family: 'Lora', serif;
+    font-size: 14px;
+}
+
+.select:hover {
+    border: 1px solid var(--secondary-color-500);
+    cursor: pointer;
+}
+
+.select:focus {
+    border: 1.5px solid var(--secondary-color-700);
+}

@@ -28,17 +28,20 @@ const Nav = () => {
         />
         <div className={ theme ? styles.lightTextLogo : styles.darkTextLogo }>foody</div>
       </div>
+
       {isHomePage && <SearchBar />}
     
       <div className={styles.navLinkContainer}>
         <div className={ theme ? styles.lightNavLinks : styles.darkNavLinks }>
           <NavLink to='/create'>Create</NavLink>
           <NavLink to='/explore'>Explore</NavLink>
+          <NavLink to='/favorites'>Favorites</NavLink>
           <NavLink to='/login'>Log in</NavLink>
         </div>
       </div>
       
       <ToggleTheme />
+      
     </div>
   );
 };

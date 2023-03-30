@@ -21,3 +21,47 @@
     font-size: small;
   color: var(--secondary-color-700);
 }
+
+.containerSortFilters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1px;
+    width: auto;
+    border: 1px solid var(--secondary-color-100);
+    border-radius: 5px;
+    background-color: var(--primary-color-100);
+    font-family: 'Lora', serif;
+    font-size: 14px;
+
+}
+
+.pagination button {
+    font-family: 'Lora', serif;
+    color: var(--primary-color-900);
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+}
+
+.pagination button:hover {
+    cursor: pointer;
+    color: var(--secondary-color-700);
+
+}
+
+.pagination span {
+    font-family: 'Lora', serif;
+    color: var(--primary-color-900);
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 8px;
+    margin-right: 8px;
+}
