@@ -122,6 +122,7 @@ const HomePage = () => {
         let totalRecipesToPaginate = doubleFilteredResult.length;
         let totalPages = Math.ceil(totalRecipesToPaginate / 9);
         setLastCurrentPage(totalPages);
+        //if (doubleFilteredResult.length === 0) alert('no hay resultados que matchen con esos filtros');
     // eslint-disable-next-line
     }, [doubleFilteredResult, selectedSortOption]);
 
