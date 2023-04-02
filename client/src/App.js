@@ -7,12 +7,17 @@ import DetailPage from './components/DetailPage/DetailPage';
 import FormPage from './components/FormPage/FormPage';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import ExplorePage from './components/ExplorePage/ExplorePage';
+import LogIn from './components/LogIn/LogIn';
+import Register from './components/Register/Register';
+import FavPage from './components/FavPage/FavPage';
 
 
 const App = () => {
 
   const location = useLocation();
   const isLandingPage = location.pathname === '/';
+  
+  
   
   return (
     <div className="App">
@@ -23,6 +28,9 @@ const App = () => {
         <Route path="/detail/:idRecipe" element={<DetailPage />} />
         <Route path="/create" element={<FormPage />} />
         <Route path="/explore" element={<ExplorePage />} />
+        <Route path="/login" element={<LogIn />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/favorites" element={<FavPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

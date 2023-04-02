@@ -146,7 +146,7 @@ const FormPage = () => {
         <div className={styles.leftPanel}>
             <label>Name: </label>
             <br />
-            <input type='text' name='name' onChange={handleChange} value={newRecipe.name} />
+            <input type='text' name='name' onChange={handleChange} value={newRecipe.name} style={{outline: "none"}} />
             {errors.name1 && <span className={styles.errors} >{errors.name1}</span>}
             {errors.name2 && <span className={styles.errors} >{errors.name2}</span>}
             {errors.name3 && <span className={styles.errors} >{errors.name3}</span>}
@@ -155,7 +155,7 @@ const FormPage = () => {
 
             <label>Image: </label>
             <br />
-            <input type='text' name='image' onChange={handleChange} value={newRecipe.image} />
+            <input type='text' name='image' onChange={handleChange} value={newRecipe.image} style={{outline: "none"}} />
             {errors.image1 && <span className={styles.errors} >{errors.image1}</span>}
             {errors.image2 && <span className={styles.errors} >{errors.image2}</span>}
             {errors.image3 && <span className={styles.errors} >{errors.image3}</span>}
@@ -163,13 +163,13 @@ const FormPage = () => {
 
             <label>Summary: </label>
             <br />
-            <input type='text' name='summary' onChange={handleChange} value={newRecipe.summary} />
+            <input type='text' name='summary' onChange={handleChange} value={newRecipe.summary} style={{outline: "none"}} />
             {errors.summary && <span className={styles.errors} >{errors.summary}</span>}
             <br />
 
             <label>Health Score: </label>
             <br />
-            <input type='number' name='healthScore' onChange={handleChange} value={newRecipe.healthScore} />
+            <input type='number' name='healthScore' onChange={handleChange} value={newRecipe.healthScore} style={{outline: "none"}} />
             {errors.healthScore1 && <span className={styles.errors} >{errors.healthScore1}</span>}
             {errors.healthScore2 && <span className={styles.errors} >{errors.healthScore2}</span>}
             {errors.healthScore3 && <span className={styles.errors} >{errors.healthScore3}</span>}
@@ -177,7 +177,7 @@ const FormPage = () => {
 
             <label>Instructions: </label>
             <br />
-            <input type='text' name='instructions' onChange={handleChange} value={newRecipe.instructions} />
+            <input type='text' name='instructions' onChange={handleChange} value={newRecipe.instructions} style={{outline: "none"}} />
             {errors.instructions && <span className={styles.errors} >{errors.instructions}</span>}
             <br />
         </div>  
@@ -216,7 +216,7 @@ const FormPage = () => {
             <input type='checkbox' name='lacto ovo vegetarian' onChange={handleChange} value='lacto ovo vegetarian' checked={newRecipe.diets.includes('lacto ovo vegetarian')} />Lacto-Ovo Vegetarian
             <br />
             <label>other: </label>
-            <input type='text' name='otherDetail' onChange={handleChange} value={newDiet} />
+            <input type='text' name='otherDetail' onChange={handleChange} value={newDiet} style={{outline: "none"}} />
             <input type='button' name='other' onClick={handleClick} value='add diet' className={styles.addButton}  />
             <br />
             <br />

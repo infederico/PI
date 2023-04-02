@@ -70,13 +70,21 @@
   transition-duration: 0.5s;
 }
 
-.lightNavLinks a {
+a:-webkit-any-link {
   margin: 0 24px;
   color: var(--light-text-color);
   text-decoration: none;
   transition-duration: 0.5s;
   font-size: 20px;
 }
+
+/* .lightNavLinks a {
+  margin: 0 24px;
+  color: var(--light-text-color);
+  text-decoration: none;
+  transition-duration: 0.5s;
+  font-size: 20px;
+} */
 
 .darkNavLinks a {
   margin: 0 24px;
@@ -95,5 +103,8 @@
 }
 
 .darkNavLinks a:focus {
+  color: var(--secondary-color);
+}
+.darkNavLinks a.active {
   color: var(--secondary-color);
 }

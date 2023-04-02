@@ -3,15 +3,20 @@ import {
     SEARCH_SUCCESS, SEARCH_FAIL, CLEAN_SEARCH_ERROR, GET_RECIPES, GET_DIETS, 
     SET_SELECTED_DIET, FILTER_BY_DIET_ALL, FILTER_BY_DIET_VEGAN, FILTER_BY_DIET_VEGETARIAN, FILTER_BY_DIET_GLUTENFREE, FILTER_BY_DIET_CUSTOM,
     SET_SELECTED_ORIGIN, FILTER_BY_ORIGIN_ALL, FILTER_BY_ORIGIN_API, FILTER_BY_ORIGIN_DB, SET_DOUBLE_FILTERED_RESULT,
-    SET_SELECTED_SORT_OPTION, SET_CURRENT_PAGE,
+    SET_SELECTED_SORT_OPTION, SET_CURRENT_PAGE, SET_FAV_CURRENT_PAGE,
     GET_RECIPE_DETAIL,
     ADD_RECIPE, ADD_BACKEND_ERRORS, CLEAN_RECIPE_DETAIL, CLEAN_RECIPE_JUST_CREATED, CLEAN_BACKEND_ERRORS } from "./actions-types";
 import { GET_RANDOM_RECIPE, CLEAN_RANDOM_RECIPE } from "./actions-types";
+import { GET_ALL_FAVORITES, SET_ACCESS, LOGIN_FAIL, LOGIN_SUCCESS } from "./actions-types";
 
 const initialState = {
     //general
     theme: true,
-
+    //login
+    access: false,
+    loginError: '',
+    userId: '',
+    username: '',
     //HomePage
     searchResult: [],
     searchError: '',
@@ -32,9 +37,13 @@ const initialState = {
     
     //FormPage
     recipeJustCreated: {},
-    backendErrors: '',
+    backendErrors: '', // used in user creation in Register.jsx too
     //ExplorePage
     randomRecipe: {},
+
+    //FavPage
+    favCurrentPage: 1,
+    favorites: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -44,6 +53,31 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 theme: !state.theme
             }
+
+        case SET_ACCESS:
+            return {
+                ...state,
+                access: !state.access,
+            }
+        case LOGIN_SUCCESS:
+            return {
+                ...state,
+                access: !state.access,
+                userId: action.payload.id,
+                username: action.payload.username
+            }
+        case LOGIN_FAIL:
+            return {
+                ...state,
+               loginError: action.payload
+            }
+
+        case GET_ALL_FAVORITES:
+            return {
+                ...state,
+                favorites: action.payload
+            }
+
         case SEARCH_SUCCESS:
             return {
                 ...state,
@@ -78,6 +112,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentPage: action.payload
+            }
+        case SET_FAV_CURRENT_PAGE:
+            return {
+                ...state,
+                favCurrentPage: action.payload
             }
 
         case SET_SELECTED_DIET:

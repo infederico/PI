@@ -3,16 +3,20 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
 import ToggleTheme from '../ThemeToggle/ThemeToggle';
 import SearchBar from '../SearchBar/SearchBar';
+// eslint-disable-next-line
+import LogOut from '../LogOut/LogOut';
 
 import styles from './Nav.module.css';
 import lightLogo from '../../assets/images/light-logo.png';
 import darkLogo from '../../assets/images/dark-logo.png';
 
 const Nav = () => {
+
   const theme = useSelector(state => state.theme);
+  const access = useSelector(state => state.access);
 
   const location = useLocation();
-  const isHomePage = location.pathname === '/home';
+  const isHomePage = location.pathname   === '/home';
   
   const navigate = useNavigate();
   const handleClick = () => {
@@ -36,7 +40,7 @@ const Nav = () => {
           <NavLink to='/create'>Create</NavLink>
           <NavLink to='/explore'>Explore</NavLink>
           <NavLink to='/favorites'>Favorites</NavLink>
-          <NavLink to='/login'>Log in</NavLink>
+          { access ? <NavLink to='/home'>Log out</NavLink> : <NavLink to='/login'>Log in</NavLink> }
         </div>
       </div>
       

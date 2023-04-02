@@ -30,11 +30,16 @@ database.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 const { Recipe } = database.models;
 const { Diet } = database.models;
+const { User } = database.models;
+const { Favorite } = database.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 Recipe.belongsToMany(Diet, { through: 'Recipe_Diet' });
 Diet.belongsToMany(Recipe, { through: 'Recipe_Diet' });
+
+User.belongsToMany(Favorite, { through: 'User_Favorite' });
+Favorite.belongsToMany(User, { through: 'User_Favorite' });
 
 module.exports = {
   ...database.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

@@ -15,27 +15,30 @@
 
 .formu input[type="text"],
 .formu input[type="number"] {
-  padding: 5px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
   width: 300px;
+  margin-bottom: 10px;
+  border-radius: 5px;  
+  padding: 8px;
+  border: 1px solid var(--secondary-color-100);
+  background-color: var(--primary-color-100);
+  color: var(--secondary-color-700);
+  font-family: 'Lora', serif;
+  font-size: 16px;
+}
+    
+.formu input[type="text"]:hover,
+.formu input[type="number"]:hover {
+  border: solid 1px var(--secondary-color-500);
+}
+
+.formu input[type="text"]:focus,
+.formu input[type="number"]:focus {
+  border: solid 1px var(--secondary-color-500);
 }
 
 .formu input[type="checkbox"] {
   margin-right: 5px;
 }
-/* 
-.formu button[type="submit"] {
-  background-color: #008CBA;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  margin-top: 20px;
-  cursor: pointer;
-  font-size: 16px;
-} */
 
 .errors {
   font-size: small;

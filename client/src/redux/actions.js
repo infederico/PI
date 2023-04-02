@@ -5,14 +5,68 @@ import {
   SET_SELECTED_DIET, FILTER_BY_DIET_ALL, FILTER_BY_DIET_VEGAN, FILTER_BY_DIET_VEGETARIAN, FILTER_BY_DIET_GLUTENFREE, FILTER_BY_DIET_CUSTOM,
   SET_DOUBLE_FILTERED_RESULT,
   SET_SELECTED_ORIGIN, FILTER_BY_ORIGIN_ALL, FILTER_BY_ORIGIN_API, FILTER_BY_ORIGIN_DB,
-  SET_SELECTED_SORT_OPTION, SET_CURRENT_PAGE,
+  SET_SELECTED_SORT_OPTION, SET_CURRENT_PAGE, SET_FAV_CURRENT_PAGE,
   GET_RECIPE_DETAIL, CLEAN_RECIPE_DETAIL,
   ADD_RECIPE, ADD_BACKEND_ERRORS, CLEAN_RECIPE_JUST_CREATED, CLEAN_BACKEND_ERRORS } from "./actions-types";
 import { GET_RANDOM_RECIPE, CLEAN_RANDOM_RECIPE } from "./actions-types";
+import { GET_ALL_FAVORITES, CREATE_NEW_USER, SET_ACCESS, LOGIN_FAIL, LOGIN_SUCCESS } from "./actions-types";
 
 
 export const toggleTheme = () => {
   return { type: TOGGLE_THEME }
+};
+
+
+export const setAccess = () => {
+  return { type: SET_ACCESS }
+};
+
+
+export const login = (userData) => async (dispatch) => {
+  try {
+    let response = await axios.post('http://localhost:3001/users/login', userData);
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: response.data
+    });
+  } catch (error) {
+    dispatch({
+      type: LOGIN_FAIL,
+      payload: error.message
+    });
+  }
+};
+
+
+export const getAllFavorites = (userId) => async (dispatch) => {
+  try {
+    let response = await axios.get(`http://localhost:3001/users/favorites/${userId}`);
+    dispatch({
+      type: GET_ALL_FAVORITES,
+      payload: response.data
+    });
+  } catch (error) {
+    dispatch({
+      type: ADD_BACKEND_ERRORS,
+      payload: error.message
+    });
+  }
+};
+
+
+export const createNewUser = (newUser) => async (dispatch) => {
+  try {
+    let response = await axios.post('http://localhost:3001/users/register', newUser);
+    dispatch({
+      type: CREATE_NEW_USER,
+      payload: response.data
+    });
+  } catch (error) {
+    dispatch({
+      type: ADD_BACKEND_ERRORS,
+      payload: error.message
+    });
+  }
 };
 
 
@@ -169,6 +223,11 @@ export const setSelectedSortOption = (sortOption) => {
 
 export const setCurrentPage = (currentPage) => {
   return { type: SET_CURRENT_PAGE, payload: currentPage }
+};
+
+
+export const setFavCurrentPage = (favCurrentPage) => {
+  return { type: SET_FAV_CURRENT_PAGE, payload: favCurrentPage }
 };
 
 

@@ -1,0 +1,120 @@
+.formu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    font-family: 'Lora', serif;
+  }
+    
+.formu label {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.formu input[type="text"],
+.formu input[type="password"] {
+    width: 300px;
+    margin-bottom: 10px;
+    border-radius: 5px;  
+    padding: 8px;
+    border: 1px solid var(--secondary-color-100);
+    background-color: var(--primary-color-100);
+    color: var(--secondary-color-700);
+    font-family: 'Lora', serif;
+    font-size: 16px;
+}
+    
+.formu input[type="text"]:hover,
+.formu input[type="password"]:hover {
+  border: solid 1px var(--secondary-color-500);
+}
+
+.formu input[type="text"]:focus,
+.formu input[type="password"]:focus {
+  border: solid 1px var(--secondary-color-500);
+}
+
+.lightErrors {
+    font-size: small;
+    color: var(--secondary-color-700);
+}
+  
+.darkErrors {
+    font-size: small;
+    color: var(--secondary-color-200);
+}
+.success {
+    font-size: small;
+    color: var(--secondary-color-700);
+}
+    
+.button {
+        z-index: 2;
+        text-align: center;
+        width: 11%;
+        border-radius: 7.5px;
+        border: var(--neutral-color-100) solid 1px;
+        box-sizing: border-box;
+        display: block;
+        overflow: hidden;
+        padding: 3px;
+        transform: translate(-50%, -50%);
+        justify-items: center;
+    }
+    
+.button:hover {
+    cursor: pointer;
+}
+    
+.button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 400%;
+    height: 100%;
+    background: linear-gradient(115deg,#4fcf70,#fad648,#a767e5,#12bcfe,#44ce7b);
+    background-size: 50% 100%;
+}
+    
+
+    
+@keyframes rainbowSlide {
+    to {
+        transform: translateX(-50%)
+    }
+}
+    
+.button:hover::before {
+    animation: rainbowSlide 1.25s linear infinite;
+}
+
+.button span {
+    z-index: 4;
+    position: relative;
+    padding: .25rem 0;
+    font-family: 'EB Garamond', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    align-items: center;
+    background: var(--primary-color-100);
+    color: var(--primary-color-800);
+    border-radius: 2.5px;
+    display: block;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.linkRegister {
+    font-family: 'EB Garamond', serif;
+    font-size: 16px;
+    align-items: center;
+    color: var(--primary-color-900); 
+}
+
+.linkRegister:hover {
+    color: var(--secondary-color); 
+}

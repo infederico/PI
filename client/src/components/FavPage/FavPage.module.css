@@ -1,0 +1,72 @@
+.light {
+    background-color: var(--primary-color-200);
+    background-size: cover;
+    color: var(--primary-color-900);
+    height: 100vh;
+  }
+  
+.dark {
+    background-color: var(--primary-color-800);
+    background-size: cover;
+    color: var(--primary-color-200);
+    height: 100vh;
+}
+
+h2 {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 24px;
+    line-height: 1;
+}
+
+.cards  {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px;
+}
+
+.containerSortFilters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1px;
+    width: auto;
+    border: 1px solid var(--secondary-color-100);
+    border-radius: 5px;
+    background-color: var(--primary-color-100);
+    font-family: 'Lora', serif;
+    font-size: 14px;
+
+}
+
+.pagination button {
+    font-family: 'Lora', serif;
+    color: var(--primary-color-900);
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+}
+
+.pagination button:hover {
+    cursor: pointer;
+    color: var(--secondary-color-700);
+
+}
+
+.pagination span {
+    font-family: 'Lora', serif;
+    color: var(--primary-color-900);
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 8px;
+    margin-right: 8px;
+}
