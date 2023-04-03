@@ -1,18 +1,35 @@
 const { Favorite } = require('../db');
+const { User } = require('../db');
+const { Diet } = require('../db');
 
 const getAllFavorites = async (userId) => {
     try {
-        const allFavorites = await Favorite.findAll({
-            where: { userId: userId },
+        const allFavorites = await User.findOne({
+            where: { id: userId },
             include: [{
-                model: Recipe,
-                include: [{ 
-                    model: Diet,
-                    through: { attributes: [] } // to exclude the junction table attributes
-                }]
-            }]  
-        });
-        return allFavorites;
+              model: Favorite,
+              include: [{ 
+                model: Diet,
+                through: { attributes: [] }
+              }],
+              attributes: {
+                exclude: ['User_Favorite']
+              }
+            }],
+            attributes: {
+              exclude: ['password', 'createdAt', 'updatedAt']
+            }
+          });
+          
+          const favorites = allFavorites.Favorites.map(favorite => {
+            const diets = favorite.Diets.map(diet => diet.name);
+            return { ...favorite.toJSON(), diets: diets };
+          });
+          
+          return { ...allFavorites.toJSON(), Favorites: favorites };
+          
+          
+
     } catch (error) {
         return { error: error.message };
     }

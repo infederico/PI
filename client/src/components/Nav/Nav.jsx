@@ -40,7 +40,7 @@ const Nav = () => {
           <NavLink to='/create'>Create</NavLink>
           <NavLink to='/explore'>Explore</NavLink>
           <NavLink to='/favorites'>Favorites</NavLink>
-          { access ? <NavLink to='/home'>Log out</NavLink> : <NavLink to='/login'>Log in</NavLink> }
+          { access ? <NavLink to='/logout'>Log out</NavLink> : <NavLink to='/login'>Log in</NavLink> }
         </div>
       </div>
       

@@ -40,6 +40,8 @@ Diet.belongsToMany(Recipe, { through: 'Recipe_Diet' });
 
 User.belongsToMany(Favorite, { through: 'User_Favorite' });
 Favorite.belongsToMany(User, { through: 'User_Favorite' });
+Favorite.belongsToMany(Diet, { through: 'Favorite_Diet' });
+Diet.belongsToMany(Favorite, { through: 'Favorite_Diet' });
 
 module.exports = {
   ...database.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

@@ -43,7 +43,7 @@ export const getAllFavorites = (userId) => async (dispatch) => {
     let response = await axios.get(`http://localhost:3001/users/favorites/${userId}`);
     dispatch({
       type: GET_ALL_FAVORITES,
-      payload: response.data
+      payload: response.data.Favorites
     });
   } catch (error) {
     dispatch({

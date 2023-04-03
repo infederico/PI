@@ -24,6 +24,7 @@ const FavPage = () => {
     const userId = useSelector(state => state.userId);
     // local states
     const [ lastCurrentPage, setLastCurrentPage ] = useState(1);
+    const [ paginatedResult, setPaginatedResult ] = useState([]);
 
     useEffect( () => {
         if (!access) navigate('/login');
@@ -31,12 +32,16 @@ const FavPage = () => {
     }, [access]);
 
     useEffect(() => {
-       
         let totalPages = Math.ceil(favorites.length / 9);
         setLastCurrentPage(totalPages);
-
     // eslint-disable-next-line
-    }, []);
+    }, [favorites]);
+    
+    let auxPaginatedResult = favorites.slice(((favCurrentPage * 9) - 9), (favCurrentPage * 9))
+    useEffect(() => {
+        setPaginatedResult(auxPaginatedResult);
+    // eslint-disable-next-line
+    }, [favorites, favCurrentPage]);
 
     const pageIncrement = () => {
         if (favCurrentPage < lastCurrentPage) {
@@ -70,7 +75,7 @@ const FavPage = () => {
            
             <span className={styles.cards} >
                 {
-                    favorites?.map((result) => {
+                    paginatedResult?.map((result) => {
                         return <RecipeCard
                             key={result.id}
                             id={result.id}
